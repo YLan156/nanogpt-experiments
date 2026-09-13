@@ -232,3 +232,17 @@ For more questions/discussions feel free to stop by **#nanoGPT** on Discord:
 ## acknowledgements
 
 All nanoGPT experiments are powered by GPUs on [Lambda labs](https://lambdalabs.com), my favorite Cloud GPU provider. Thank you Lambda labs for sponsoring nanoGPT!
+## Results
+
+### W&B Experiment Tracking
+
+- Training metrics were logged to W&B.
+- Results were recorded with W&B Tables.
+- Model checkpoints and LoRA adapters were uploaded as W&B Artifacts.
+## Results
+
+### W&B Experiment Tracking
+
+- Training metrics were logged to W&B.
+- Results were recorded with W&B Tables.
+- Checkpoints and LoRA adapters were uploaded as W&B Artifacts.
