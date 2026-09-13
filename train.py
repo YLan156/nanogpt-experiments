@@ -43,6 +43,19 @@ init_from = 'scratch' # 'scratch' or 'resume' or 'gpt2*'
 wandb_log = False # disabled by default
 wandb_project = 'owt'
 wandb_run_name = 'gpt2' # 'run' + str(time.time())
+wandb_tags = '' # comma-separated tags added to the automatic scratch/gpt2 tag
+wandb_log_model_artifact = True
+wandb_log_token_frequency = True
+wandb_log_embedding_norm = True
+wandb_log_model_stats = True
+wandb_log_generations = True
+wandb_generation_prompt = 'Once upon a time'
+wandb_generation_max_new_tokens = 80
+wandb_generation_temperature = 0.8
+wandb_generation_top_k = 200
+wandb_token_frequency_top_k = 50
+wandb_comparison_prompts = '' # use | to separate fixed prompts for before/after comparison
+wandb_comparison_max_new_tokens = 80
 # data
 dataset = 'openwebtext'
 gradient_accumulation_steps = 5 * 8 # used to simulate larger batch sizes
@@ -70,8 +83,9 @@ min_lr = 6e-5 # minimum learning rate, should be ~= learning_rate/10 per Chinchi
 backend = 'nccl' # 'nccl', 'gloo', etc.
 # system
 device = 'cuda' # examples: 'cpu', 'cuda', 'cuda:0', 'cuda:1' etc., or try 'mps' on macbooks
-dtype = 'bfloat16' if torch.cuda.is_available() and torch.cuda.is_bf16_supported() else 'float16' # 'float32', 'bfloat16', or 'float16', the latter will auto implement a GradScaler
+dtype = 'float32' if device == 'cpu' else ('bfloat16' if torch.cuda.is_available() and torch.cuda.is_bf16_supported() else 'float16') # 'float32', 'bfloat16', or 'float16', the latter will auto implement a GradScaler
 compile = True # use PyTorch 2.0 to compile the model to be faster
+seed = 1337
 # -----------------------------------------------------------------------------
 config_keys = [k for k,v in globals().items() if not k.startswith('_') and isinstance(v, (int, float, bool, str))]
 exec(open('configurator.py').read()) # overrides from command line or config file
@@ -103,7 +117,7 @@ print(f"tokens per iteration will be: {tokens_per_iter:,}")
 
 if master_process:
     os.makedirs(out_dir, exist_ok=True)
-torch.manual_seed(1337 + seed_offset)
+torch.manual_seed(seed + seed_offset)
 torch.backends.cuda.matmul.allow_tf32 = True # allow tf32 on matmul
 torch.backends.cudnn.allow_tf32 = True # allow tf32 on cudnn
 device_type = 'cuda' if 'cuda' in device else 'cpu' # for later use in torch.autocast
@@ -137,11 +151,14 @@ best_val_loss = 1e9
 # attempt to derive vocab_size from the dataset
 meta_path = os.path.join(data_dir, 'meta.pkl')
 meta_vocab_size = None
+meta = None
 if os.path.exists(meta_path):
     with open(meta_path, 'rb') as f:
         meta = pickle.load(f)
     meta_vocab_size = meta['vocab_size']
     print(f"found vocab_size = {meta_vocab_size} (inside {meta_path})")
+
+tokenizer_type = 'character' if meta is not None and 'stoi' in meta and 'itos' in meta else 'gpt2'
 
 # model init
 model_args = dict(n_layer=n_layer, n_head=n_head, n_embd=n_embd, block_size=block_size,
@@ -193,7 +210,7 @@ if block_size < model.config.block_size:
 model.to(device)
 
 # initialize a GradScaler. If enabled=False scaler is a no-op
-scaler = torch.cuda.amp.GradScaler(enabled=(dtype == 'float16'))
+scaler = torch.amp.GradScaler('cuda', enabled=(dtype == 'float16'))
 
 # optimizer
 optimizer = model.configure_optimizers(weight_decay, learning_rate, (beta1, beta2), device_type)
@@ -241,16 +258,200 @@ def get_lr(it):
     coeff = 0.5 * (1.0 + math.cos(math.pi * decay_ratio)) # coeff ranges 0..1
     return min_lr + coeff * (learning_rate - min_lr)
 
+def get_base_model(model):
+    base_model = model.module if hasattr(model, 'module') else model
+    return base_model._orig_mod if hasattr(base_model, '_orig_mod') else base_model
+
+def get_wandb_tags():
+    init_tag = 'gpt2' if init_from.startswith('gpt2') else init_from
+    extra_tags = [tag.strip() for tag in wandb_tags.split(',') if tag.strip()]
+    return [init_tag] + extra_tags
+
+def get_gpu_peak_memory_mb():
+    if device_type != 'cuda':
+        return 0.0
+    return torch.cuda.max_memory_allocated(device) / 1024**2
+
+def get_comparison_prompts():
+    return [prompt for prompt in wandb_comparison_prompts.split('|') if prompt]
+
+def get_total_grad_norm(parameters):
+    grads = [p.grad.detach() for p in parameters if p.grad is not None]
+    if len(grads) == 0:
+        return 0.0
+    norms = torch.stack([torch.linalg.vector_norm(g, 2) for g in grads])
+    return torch.linalg.vector_norm(norms, 2).item()
+
+def build_token_frequency_plot(wandb):
+    train_bin = os.path.join(data_dir, 'train.bin')
+    if not os.path.exists(train_bin):
+        return None
+    data = np.memmap(train_bin, dtype=np.uint16, mode='r')
+    counts = np.bincount(np.asarray(data), minlength=model_args['vocab_size'])
+    top_ids = np.argsort(counts)[-wandb_token_frequency_top_k:][::-1]
+    table = wandb.Table(columns=['token_id', 'token', 'count'])
+    for token_id in top_ids:
+        if counts[token_id] == 0:
+            continue
+        token = decode_tokens([int(token_id)])
+        table.add_data(int(token_id), token, int(counts[token_id]))
+    return wandb.plot.bar(table, 'token', 'count', title='Token frequency')
+
+def build_embedding_norm_plot(wandb):
+    base_model = get_base_model(model)
+    with torch.no_grad():
+        norms = base_model.transformer.wte.weight.detach().float().norm(dim=1).cpu().numpy()
+    top_ids = np.argsort(norms)[-wandb_token_frequency_top_k:][::-1]
+    table = wandb.Table(columns=['token_id', 'token', 'embedding_norm'])
+    for token_id in top_ids:
+        table.add_data(int(token_id), decode_tokens([int(token_id)]), float(norms[token_id]))
+    return wandb.plot.bar(table, 'token', 'embedding_norm', title='Embedding norm')
+
+def build_model_stats_table(wandb):
+    base_model = get_base_model(model)
+    table = wandb.Table(columns=['name', 'value'])
+    stats = {
+        'parameters': base_model.get_num_params(non_embedding=False),
+        'parameters_non_embedding': base_model.get_num_params(non_embedding=True),
+        'n_layer': model_args['n_layer'],
+        'n_head': model_args['n_head'],
+        'n_embd': model_args['n_embd'],
+        'block_size': model_args['block_size'],
+        'vocab_size': model_args['vocab_size'],
+    }
+    for name, value in stats.items():
+        table.add_data(name, value)
+    return table
+
+def encode_prompt(text):
+    if tokenizer_type == 'character' and meta is not None:
+        return [meta['stoi'][ch] for ch in text if ch in meta['stoi']]
+    import tiktoken
+    return tiktoken.get_encoding('gpt2').encode(text)
+
+def decode_tokens(token_ids):
+    if tokenizer_type == 'character' and meta is not None:
+        return ''.join(meta['itos'].get(int(i), '') for i in token_ids)
+    import tiktoken
+    return tiktoken.get_encoding('gpt2').decode([int(i) for i in token_ids])
+
+@torch.no_grad()
+def build_generation_table(wandb):
+    prompt_ids = encode_prompt(wandb_generation_prompt)
+    if len(prompt_ids) == 0:
+        return None
+    base_model = get_base_model(model)
+    was_training = base_model.training
+    base_model.eval()
+    idx = torch.tensor(prompt_ids, dtype=torch.long, device=device)[None, ...]
+    output = base_model.generate(
+        idx,
+        max_new_tokens=wandb_generation_max_new_tokens,
+        temperature=wandb_generation_temperature,
+        top_k=wandb_generation_top_k,
+    )
+    if was_training:
+        base_model.train()
+    generated = decode_tokens(output[0].tolist())
+    table = wandb.Table(columns=['iter', 'prompt', 'completion'])
+    table.add_data(iter_num, wandb_generation_prompt, generated)
+    return table
+
+@torch.no_grad()
+def generate_fixed_completions(prompts):
+    base_model = get_base_model(model)
+    was_training = base_model.training
+    cpu_rng_state = torch.get_rng_state()
+    cuda_rng_state = torch.cuda.get_rng_state(device) if device_type == 'cuda' else None
+    base_model.eval()
+    completions = []
+    for sample_id, prompt in enumerate(prompts):
+        torch.manual_seed(seed + 10000 + sample_id)
+        if device_type == 'cuda':
+            torch.cuda.manual_seed_all(seed + 10000 + sample_id)
+        prompt_ids = encode_prompt(prompt)
+        if len(prompt_ids) == 0:
+            completions.append('')
+            continue
+        idx = torch.tensor(prompt_ids, dtype=torch.long, device=device)[None, ...]
+        output = base_model.generate(
+            idx,
+            max_new_tokens=wandb_comparison_max_new_tokens,
+            temperature=wandb_generation_temperature,
+            top_k=wandb_generation_top_k,
+        )
+        completions.append(decode_tokens(output[0].tolist()))
+    torch.set_rng_state(cpu_rng_state)
+    if device_type == 'cuda':
+        torch.cuda.set_rng_state(cuda_rng_state, device)
+    if was_training:
+        base_model.train()
+    return completions
+
+def build_comparison_table(wandb, prompts, before, after):
+    table = wandb.Table(columns=['sample_id', 'prompt', 'before_training', 'after_training'])
+    for sample_id, (prompt, before_text, after_text) in enumerate(zip(prompts, before, after), start=1):
+        table.add_data(sample_id, prompt, before_text, after_text)
+    return table
+
+def log_wandb_checkpoint_artifact(wandb, ckpt_path):
+    if not wandb_log_model_artifact or not os.path.exists(ckpt_path):
+        return
+    artifact_name = ''.join(ch if ch.isalnum() or ch in '-_.' else '-' for ch in wandb_run_name)
+    artifact = wandb.Artifact(
+        name=f"{artifact_name}-best-checkpoint",
+        type='model',
+        metadata={'iter': iter_num, 'best_val_loss': float(best_val_loss), 'init_from': init_from},
+    )
+    artifact.add_file(ckpt_path)
+    logged_artifact = wandb.log_artifact(artifact, aliases=['best', f'iter-{iter_num}'])
+    logged_artifact.wait()
+    print(f"W&B model Artifact: {logged_artifact.url}")
+
 # logging
 if wandb_log and master_process:
     import wandb
-    wandb.init(project=wandb_project, name=wandb_run_name, config=config)
+    wandb_config = dict(config)
+    wandb_config.update({
+        'model_args': dict(model_args),
+        'tokenizer_type': tokenizer_type,
+        'dataset': dataset,
+        'seed': seed,
+        'batch_size': batch_size,
+        'gradient_accumulation_steps': gradient_accumulation_steps,
+        'ddp_world_size': ddp_world_size,
+        'tokens_per_iter': tokens_per_iter,
+        'effective_batch_tokens': tokens_per_iter,
+        'device': device,
+        'device_type': device_type,
+        'parameter_count': get_base_model(model).get_num_params(non_embedding=False),
+        'parameter_count_non_embedding': get_base_model(model).get_num_params(non_embedding=True),
+    })
+    wandb.init(project=wandb_project, name=wandb_run_name, tags=get_wandb_tags(), config=wandb_config)
+    print(f"W&B run: {wandb.run.url}")
+    initial_logs = {}
+    if wandb_log_token_frequency:
+        token_frequency_plot = build_token_frequency_plot(wandb)
+        if token_frequency_plot is not None:
+            initial_logs['charts/token_frequency'] = token_frequency_plot
+    if wandb_log_embedding_norm:
+        initial_logs['charts/embedding_norm'] = build_embedding_norm_plot(wandb)
+    if wandb_log_model_stats:
+        initial_logs['tables/model_stats'] = build_model_stats_table(wandb)
+    if initial_logs:
+        wandb.log(initial_logs, step=iter_num)
+    comparison_prompts = get_comparison_prompts()
+    comparison_before = generate_fixed_completions(comparison_prompts) if comparison_prompts else []
+    if device_type == 'cuda':
+        torch.cuda.reset_peak_memory_stats(device)
 
 # training loop
 X, Y = get_batch('train') # fetch the very first batch
 t0 = time.time()
+training_start_time = t0
+training_peak_memory_mb = 0.0
 local_iter_num = 0 # number of iterations in the lifetime of this process
-raw_model = model.module if ddp else model # unwrap DDP container if needed
+raw_model = get_base_model(model) # unwrap DDP and torch.compile containers if needed
 running_mfu = -1.0
 while True:
 
@@ -264,13 +465,22 @@ while True:
         losses = estimate_loss()
         print(f"step {iter_num}: train loss {losses['train']:.4f}, val loss {losses['val']:.4f}")
         if wandb_log:
-            wandb.log({
+            eval_logs = {
                 "iter": iter_num,
                 "train/loss": losses['train'],
                 "val/loss": losses['val'],
                 "lr": lr,
                 "mfu": running_mfu*100, # convert to percentage
-            })
+            }
+            if wandb_log_embedding_norm:
+                eval_logs['charts/embedding_norm'] = build_embedding_norm_plot(wandb)
+            if wandb_log_model_stats:
+                eval_logs['tables/model_stats'] = build_model_stats_table(wandb)
+            if wandb_log_generations:
+                generation_table = build_generation_table(wandb)
+                if generation_table is not None:
+                    eval_logs['tables/generations'] = generation_table
+            wandb.log(eval_logs, step=iter_num)
         if losses['val'] < best_val_loss or always_save_checkpoint:
             best_val_loss = losses['val']
             if iter_num > 0:
@@ -283,7 +493,10 @@ while True:
                     'config': config,
                 }
                 print(f"saving checkpoint to {out_dir}")
-                torch.save(checkpoint, os.path.join(out_dir, 'ckpt.pt'))
+                ckpt_path = os.path.join(out_dir, 'ckpt.pt')
+                torch.save(checkpoint, ckpt_path)
+                if wandb_log:
+                    log_wandb_checkpoint_artifact(wandb, ckpt_path)
     if iter_num == 0 and eval_only:
         break
 
@@ -303,10 +516,17 @@ while True:
         X, Y = get_batch('train')
         # backward pass, with gradient scaling if training in fp16
         scaler.scale(loss).backward()
+    grad_norm = None
+    if wandb_log and master_process:
+        scaler.unscale_(optimizer)
+        grad_norm = get_total_grad_norm(model.parameters())
     # clip the gradient
     if grad_clip != 0.0:
-        scaler.unscale_(optimizer)
-        torch.nn.utils.clip_grad_norm_(model.parameters(), grad_clip)
+        if grad_norm is None:
+            scaler.unscale_(optimizer)
+        clipped_grad_norm = torch.nn.utils.clip_grad_norm_(model.parameters(), grad_clip)
+        if grad_norm is None:
+            grad_norm = clipped_grad_norm.item()
     # step the optimizer and scaler if training in fp16
     scaler.step(optimizer)
     scaler.update()
@@ -317,20 +537,58 @@ while True:
     t1 = time.time()
     dt = t1 - t0
     t0 = t1
-    if iter_num % log_interval == 0 and master_process:
+    if master_process:
         # get loss as float. note: this is a CPU-GPU sync point
         # scale up to undo the division above, approximating the true total loss (exact would have been a sum)
         lossf = loss.item() * gradient_accumulation_steps
         if local_iter_num >= 5: # let the training loop settle a bit
             mfu = raw_model.estimate_mfu(batch_size * gradient_accumulation_steps, dt)
             running_mfu = mfu if running_mfu == -1.0 else 0.9*running_mfu + 0.1*mfu
-        print(f"iter {iter_num}: loss {lossf:.4f}, time {dt*1000:.2f}ms, mfu {running_mfu*100:.2f}%")
+        tokens_per_second = tokens_per_iter / dt
+        peak_memory_mb = get_gpu_peak_memory_mb()
+        training_peak_memory_mb = max(training_peak_memory_mb, peak_memory_mb)
+        if iter_num % log_interval == 0:
+            print(f"iter {iter_num}: loss {lossf:.4f}, time {dt*1000:.2f}ms, mfu {running_mfu*100:.2f}%")
+        if wandb_log:
+            wandb.log({
+                'iter': iter_num,
+                'iter/loss': lossf,
+                'iter/time_ms': dt * 1000,
+                'iter/tokens_per_second': tokens_per_second,
+                'iter/grad_norm': grad_norm if grad_norm is not None else 0.0,
+                'iter/parameter_count': get_base_model(model).get_num_params(non_embedding=False),
+                'iter/peak_memory_mb': peak_memory_mb,
+                'lr': lr,
+                'mfu': running_mfu * 100,
+            }, step=iter_num)
+        if device_type == 'cuda':
+            torch.cuda.reset_peak_memory_stats(device)
     iter_num += 1
     local_iter_num += 1
 
     # termination conditions
     if iter_num > max_iters:
         break
+
+if wandb_log and master_process:
+    training_time_seconds = time.time() - training_start_time
+    comparison_prompts = get_comparison_prompts()
+    if comparison_prompts:
+        comparison_after = generate_fixed_completions(comparison_prompts)
+        wandb.log({
+            'tables/fixed_prompt_comparison': build_comparison_table(
+                wandb, comparison_prompts, comparison_before, comparison_after
+            ),
+            'training/time_seconds': training_time_seconds,
+            'training/peak_memory_mb': training_peak_memory_mb,
+            'training/total_tokens': iter_num * tokens_per_iter,
+        }, step=iter_num)
+    else:
+        wandb.log({
+            'training/time_seconds': training_time_seconds,
+            'training/peak_memory_mb': training_peak_memory_mb,
+            'training/total_tokens': iter_num * tokens_per_iter,
+        }, step=iter_num)
 
 if ddp:
     destroy_process_group()
