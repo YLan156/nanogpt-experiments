@@ -1,12 +1,30 @@
 .DS_Store
-.idea
+.idea/
 .ipynb_checkpoints/
-.vscode
+.vscode/
 __pycache__/
-*.bin
-*.pkl
-*.pt
-*.pyc
-input.txt
+*.py[cod]
+
+# Local environment and secrets.
+.env
 env/
 venv/
+.venv/
+.venv.broken/
+
+# Experiment logs and local caches.
+wandb/
+.cache/
+huggingface_cache/
+
+# Generated dataset artifacts.
+data/*/input.txt
+data/*/train.bin
+data/*/val.bin
+data/*/meta.pkl
+
+# Generated checkpoints and model weights.
+out*/
+*.pt
+*.bin
+*.safetensors
