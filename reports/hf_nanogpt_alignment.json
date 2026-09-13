@@ -1,0 +1,2874 @@
+{
+  "model": "openai-community/gpt2",
+  "nanogpt_loader": "GPT.from_pretrained(gpt2)",
+  "device": "cpu",
+  "seed": 1337,
+  "generation": {
+    "mode": "greedy",
+    "temperature": 0.8,
+    "top_k": 200,
+    "max_new_tokens": 100
+  },
+  "parameters": {
+    "hf_parameter_count": 124439808,
+    "nanogpt_parameter_count": 124439808,
+    "parameter_count_equal": true,
+    "parameter_tensor_count_hf": 148,
+    "parameter_tensor_count_nanogpt": 148,
+    "exact_shape_matches": 112,
+    "transpose_shape_matches": 36,
+    "shape_mismatches": [],
+    "shapes": [
+      {
+        "name": "transformer.h.0.attn.c_attn.bias",
+        "hf_shape": [
+          2304
+        ],
+        "nanogpt_shape": [
+          2304
+        ],
+        "exact_match": true,
+        "transpose_match": false
+      },
+      {
+        "name": "transformer.h.0.attn.c_attn.weight",
+        "hf_shape": [
+          768,
+          2304
+        ],
+        "nanogpt_shape": [
+          2304,
+          768
+        ],
+        "exact_match": false,
+        "transpose_match": true
+      },
+      {
+        "name": "transformer.h.0.attn.c_proj.bias",
+        "hf_shape": [
+          768
+        ],
+        "nanogpt_shape": [
+          768
+        ],
+        "exact_match": true,
+        "transpose_match": false
+      },
+      {
+        "name": "transformer.h.0.attn.c_proj.weight",
+        "hf_shape": [
+          768,
+          768
+        ],
+        "nanogpt_shape": [
+          768,
+          768
+        ],
+        "exact_match": true,
+        "transpose_match": true
+      },
+      {
+        "name": "transformer.h.0.ln_1.bias",
+        "hf_shape": [
+          768
+        ],
+        "nanogpt_shape": [
+          768
+        ],
+        "exact_match": true,
+        "transpose_match": false
+      },
+      {
+        "name": "transformer.h.0.ln_1.weight",
+        "hf_shape": [
+          768
+        ],
+        "nanogpt_shape": [
+          768
+        ],
+        "exact_match": true,
+        "transpose_match": false
+      },
+      {
+        "name": "transformer.h.0.ln_2.bias",
+        "hf_shape": [
+          768
+        ],
+        "nanogpt_shape": [
+          768
+        ],
+        "exact_match": true,
+        "transpose_match": false
+      },
+      {
+        "name": "transformer.h.0.ln_2.weight",
+        "hf_shape": [
+          768
+        ],
+        "nanogpt_shape": [
+          768
+        ],
+        "exact_match": true,
+        "transpose_match": false
+      },
+      {
+        "name": "transformer.h.0.mlp.c_fc.bias",
+        "hf_shape": [
+          3072
+        ],
+        "nanogpt_shape": [
+          3072
+        ],
+        "exact_match": true,
+        "transpose_match": false
+      },
+      {
+        "name": "transformer.h.0.mlp.c_fc.weight",
+        "hf_shape": [
+          768,
+          3072
+        ],
+        "nanogpt_shape": [
+          3072,
+          768
+        ],
+        "exact_match": false,
+        "transpose_match": true
+      },
+      {
+        "name": "transformer.h.0.mlp.c_proj.bias",
+        "hf_shape": [
+          768
+        ],
+        "nanogpt_shape": [
+          768
+        ],
+        "exact_match": true,
+        "transpose_match": false
+      },
+      {
+        "name": "transformer.h.0.mlp.c_proj.weight",
+        "hf_shape": [
+          3072,
+          768
+        ],
+        "nanogpt_shape": [
+          768,
+          3072
+        ],
+        "exact_match": false,
+        "transpose_match": true
+      },
+      {
+        "name": "transformer.h.1.attn.c_attn.bias",
+        "hf_shape": [
+          2304
+        ],
+        "nanogpt_shape": [
+          2304
+        ],
+        "exact_match": true,
+        "transpose_match": false
+      },
+      {
+        "name": "transformer.h.1.attn.c_attn.weight",
+        "hf_shape": [
+          768,
+          2304
+        ],
+        "nanogpt_shape": [
+          2304,
+          768
+        ],
+        "exact_match": false,
+        "transpose_match": true
+      },
+      {
+        "name": "transformer.h.1.attn.c_proj.bias",
+        "hf_shape": [
+          768
+        ],
+        "nanogpt_shape": [
+          768
+        ],
+        "exact_match": true,
+        "transpose_match": false
+      },
+      {
+        "name": "transformer.h.1.attn.c_proj.weight",
+        "hf_shape": [
+          768,
+          768
+        ],
+        "nanogpt_shape": [
+          768,
+          768
+        ],
+        "exact_match": true,
+        "transpose_match": true
+      },
+      {
+        "name": "transformer.h.1.ln_1.bias",
+        "hf_shape": [
+          768
+        ],
+        "nanogpt_shape": [
+          768
+        ],
+        "exact_match": true,
+        "transpose_match": false
+      },
+      {
+        "name": "transformer.h.1.ln_1.weight",
+        "hf_shape": [
+          768
+        ],
+        "nanogpt_shape": [
+          768
+        ],
+        "exact_match": true,
+        "transpose_match": false
+      },
+      {
+        "name": "transformer.h.1.ln_2.bias",
+        "hf_shape": [
+          768
+        ],
+        "nanogpt_shape": [
+          768
+        ],
+        "exact_match": true,
+        "transpose_match": false
+      },
+      {
+        "name": "transformer.h.1.ln_2.weight",
+        "hf_shape": [
+          768
+        ],
+        "nanogpt_shape": [
+          768
+        ],
+        "exact_match": true,
+        "transpose_match": false
+      },
+      {
+        "name": "transformer.h.1.mlp.c_fc.bias",
+        "hf_shape": [
+          3072
+        ],
+        "nanogpt_shape": [
+          3072
+        ],
+        "exact_match": true,
+        "transpose_match": false
+      },
+      {
+        "name": "transformer.h.1.mlp.c_fc.weight",
+        "hf_shape": [
+          768,
+          3072
+        ],
+        "nanogpt_shape": [
+          3072,
+          768
+        ],
+        "exact_match": false,
+        "transpose_match": true
+      },
+      {
+        "name": "transformer.h.1.mlp.c_proj.bias",
+        "hf_shape": [
+          768
+        ],
+        "nanogpt_shape": [
+          768
+        ],
+        "exact_match": true,
+        "transpose_match": false
+      },
+      {
+        "name": "transformer.h.1.mlp.c_proj.weight",
+        "hf_shape": [
+          3072,
+          768
+        ],
+        "nanogpt_shape": [
+          768,
+          3072
+        ],
+        "exact_match": false,
+        "transpose_match": true
+      },
+      {
+        "name": "transformer.h.10.attn.c_attn.bias",
+        "hf_shape": [
+          2304
+        ],
+        "nanogpt_shape": [
+          2304
+        ],
+        "exact_match": true,
+        "transpose_match": false
+      },
+      {
+        "name": "transformer.h.10.attn.c_attn.weight",
+        "hf_shape": [
+          768,
+          2304
+        ],
+        "nanogpt_shape": [
+          2304,
+          768
+        ],
+        "exact_match": false,
+        "transpose_match": true
+      },
+      {
+        "name": "transformer.h.10.attn.c_proj.bias",
+        "hf_shape": [
+          768
+        ],
+        "nanogpt_shape": [
+          768
+        ],
+        "exact_match": true,
+        "transpose_match": false
+      },
+      {
+        "name": "transformer.h.10.attn.c_proj.weight",
+        "hf_shape": [
+          768,
+          768
+        ],
+        "nanogpt_shape": [
+          768,
+          768
+        ],
+        "exact_match": true,
+        "transpose_match": true
+      },
+      {
+        "name": "transformer.h.10.ln_1.bias",
+        "hf_shape": [
+          768
+        ],
+        "nanogpt_shape": [
+          768
+        ],
+        "exact_match": true,
+        "transpose_match": false
+      },
+      {
+        "name": "transformer.h.10.ln_1.weight",
+        "hf_shape": [
+          768
+        ],
+        "nanogpt_shape": [
+          768
+        ],
+        "exact_match": true,
+        "transpose_match": false
+      },
+      {
+        "name": "transformer.h.10.ln_2.bias",
+        "hf_shape": [
+          768
+        ],
+        "nanogpt_shape": [
+          768
+        ],
+        "exact_match": true,
+        "transpose_match": false
+      },
+      {
+        "name": "transformer.h.10.ln_2.weight",
+        "hf_shape": [
+          768
+        ],
+        "nanogpt_shape": [
+          768
+        ],
+        "exact_match": true,
+        "transpose_match": false
+      },
+      {
+        "name": "transformer.h.10.mlp.c_fc.bias",
+        "hf_shape": [
+          3072
+        ],
+        "nanogpt_shape": [
+          3072
+        ],
+        "exact_match": true,
+        "transpose_match": false
+      },
+      {
+        "name": "transformer.h.10.mlp.c_fc.weight",
+        "hf_shape": [
+          768,
+          3072
+        ],
+        "nanogpt_shape": [
+          3072,
+          768
+        ],
+        "exact_match": false,
+        "transpose_match": true
+      },
+      {
+        "name": "transformer.h.10.mlp.c_proj.bias",
+        "hf_shape": [
+          768
+        ],
+        "nanogpt_shape": [
+          768
+        ],
+        "exact_match": true,
+        "transpose_match": false
+      },
+      {
+        "name": "transformer.h.10.mlp.c_proj.weight",
+        "hf_shape": [
+          3072,
+          768
+        ],
+        "nanogpt_shape": [
+          768,
+          3072
+        ],
+        "exact_match": false,
+        "transpose_match": true
+      },
+      {
+        "name": "transformer.h.11.attn.c_attn.bias",
+        "hf_shape": [
+          2304
+        ],
+        "nanogpt_shape": [
+          2304
+        ],
+        "exact_match": true,
+        "transpose_match": false
+      },
+      {
+        "name": "transformer.h.11.attn.c_attn.weight",
+        "hf_shape": [
+          768,
+          2304
+        ],
+        "nanogpt_shape": [
+          2304,
+          768
+        ],
+        "exact_match": false,
+        "transpose_match": true
+      },
+      {
+        "name": "transformer.h.11.attn.c_proj.bias",
+        "hf_shape": [
+          768
+        ],
+        "nanogpt_shape": [
+          768
+        ],
+        "exact_match": true,
+        "transpose_match": false
+      },
+      {
+        "name": "transformer.h.11.attn.c_proj.weight",
+        "hf_shape": [
+          768,
+          768
+        ],
+        "nanogpt_shape": [
+          768,
+          768
+        ],
+        "exact_match": true,
+        "transpose_match": true
+      },
+      {
+        "name": "transformer.h.11.ln_1.bias",
+        "hf_shape": [
+          768
+        ],
+        "nanogpt_shape": [
+          768
+        ],
+        "exact_match": true,
+        "transpose_match": false
+      },
+      {
+        "name": "transformer.h.11.ln_1.weight",
+        "hf_shape": [
+          768
+        ],
+        "nanogpt_shape": [
+          768
+        ],
+        "exact_match": true,
+        "transpose_match": false
+      },
+      {
+        "name": "transformer.h.11.ln_2.bias",
+        "hf_shape": [
+          768
+        ],
+        "nanogpt_shape": [
+          768
+        ],
+        "exact_match": true,
+        "transpose_match": false
+      },
+      {
+        "name": "transformer.h.11.ln_2.weight",
+        "hf_shape": [
+          768
+        ],
+        "nanogpt_shape": [
+          768
+        ],
+        "exact_match": true,
+        "transpose_match": false
+      },
+      {
+        "name": "transformer.h.11.mlp.c_fc.bias",
+        "hf_shape": [
+          3072
+        ],
+        "nanogpt_shape": [
+          3072
+        ],
+        "exact_match": true,
+        "transpose_match": false
+      },
+      {
+        "name": "transformer.h.11.mlp.c_fc.weight",
+        "hf_shape": [
+          768,
+          3072
+        ],
+        "nanogpt_shape": [
+          3072,
+          768
+        ],
+        "exact_match": false,
+        "transpose_match": true
+      },
+      {
+        "name": "transformer.h.11.mlp.c_proj.bias",
+        "hf_shape": [
+          768
+        ],
+        "nanogpt_shape": [
+          768
+        ],
+        "exact_match": true,
+        "transpose_match": false
+      },
+      {
+        "name": "transformer.h.11.mlp.c_proj.weight",
+        "hf_shape": [
+          3072,
+          768
+        ],
+        "nanogpt_shape": [
+          768,
+          3072
+        ],
+        "exact_match": false,
+        "transpose_match": true
+      },
+      {
+        "name": "transformer.h.2.attn.c_attn.bias",
+        "hf_shape": [
+          2304
+        ],
+        "nanogpt_shape": [
+          2304
+        ],
+        "exact_match": true,
+        "transpose_match": false
+      },
+      {
+        "name": "transformer.h.2.attn.c_attn.weight",
+        "hf_shape": [
+          768,
+          2304
+        ],
+        "nanogpt_shape": [
+          2304,
+          768
+        ],
+        "exact_match": false,
+        "transpose_match": true
+      },
+      {
+        "name": "transformer.h.2.attn.c_proj.bias",
+        "hf_shape": [
+          768
+        ],
+        "nanogpt_shape": [
+          768
+        ],
+        "exact_match": true,
+        "transpose_match": false
+      },
+      {
+        "name": "transformer.h.2.attn.c_proj.weight",
+        "hf_shape": [
+          768,
+          768
+        ],
+        "nanogpt_shape": [
+          768,
+          768
+        ],
+        "exact_match": true,
+        "transpose_match": true
+      },
+      {
+        "name": "transformer.h.2.ln_1.bias",
+        "hf_shape": [
+          768
+        ],
+        "nanogpt_shape": [
+          768
+        ],
+        "exact_match": true,
+        "transpose_match": false
+      },
+      {
+        "name": "transformer.h.2.ln_1.weight",
+        "hf_shape": [
+          768
+        ],
+        "nanogpt_shape": [
+          768
+        ],
+        "exact_match": true,
+        "transpose_match": false
+      },
+      {
+        "name": "transformer.h.2.ln_2.bias",
+        "hf_shape": [
+          768
+        ],
+        "nanogpt_shape": [
+          768
+        ],
+        "exact_match": true,
+        "transpose_match": false
+      },
+      {
+        "name": "transformer.h.2.ln_2.weight",
+        "hf_shape": [
+          768
+        ],
+        "nanogpt_shape": [
+          768
+        ],
+        "exact_match": true,
+        "transpose_match": false
+      },
+      {
+        "name": "transformer.h.2.mlp.c_fc.bias",
+        "hf_shape": [
+          3072
+        ],
+        "nanogpt_shape": [
+          3072
+        ],
+        "exact_match": true,
+        "transpose_match": false
+      },
+      {
+        "name": "transformer.h.2.mlp.c_fc.weight",
+        "hf_shape": [
+          768,
+          3072
+        ],
+        "nanogpt_shape": [
+          3072,
+          768
+        ],
+        "exact_match": false,
+        "transpose_match": true
+      },
+      {
+        "name": "transformer.h.2.mlp.c_proj.bias",
+        "hf_shape": [
+          768
+        ],
+        "nanogpt_shape": [
+          768
+        ],
+        "exact_match": true,
+        "transpose_match": false
+      },
+      {
+        "name": "transformer.h.2.mlp.c_proj.weight",
+        "hf_shape": [
+          3072,
+          768
+        ],
+        "nanogpt_shape": [
+          768,
+          3072
+        ],
+        "exact_match": false,
+        "transpose_match": true
+      },
+      {
+        "name": "transformer.h.3.attn.c_attn.bias",
+        "hf_shape": [
+          2304
+        ],
+        "nanogpt_shape": [
+          2304
+        ],
+        "exact_match": true,
+        "transpose_match": false
+      },
+      {
+        "name": "transformer.h.3.attn.c_attn.weight",
+        "hf_shape": [
+          768,
+          2304
+        ],
+        "nanogpt_shape": [
+          2304,
+          768
+        ],
+        "exact_match": false,
+        "transpose_match": true
+      },
+      {
+        "name": "transformer.h.3.attn.c_proj.bias",
+        "hf_shape": [
+          768
+        ],
+        "nanogpt_shape": [
+          768
+        ],
+        "exact_match": true,
+        "transpose_match": false
+      },
+      {
+        "name": "transformer.h.3.attn.c_proj.weight",
+        "hf_shape": [
+          768,
+          768
+        ],
+        "nanogpt_shape": [
+          768,
+          768
+        ],
+        "exact_match": true,
+        "transpose_match": true
+      },
+      {
+        "name": "transformer.h.3.ln_1.bias",
+        "hf_shape": [
+          768
+        ],
+        "nanogpt_shape": [
+          768
+        ],
+        "exact_match": true,
+        "transpose_match": false
+      },
+      {
+        "name": "transformer.h.3.ln_1.weight",
+        "hf_shape": [
+          768
+        ],
+        "nanogpt_shape": [
+          768
+        ],
+        "exact_match": true,
+        "transpose_match": false
+      },
+      {
+        "name": "transformer.h.3.ln_2.bias",
+        "hf_shape": [
+          768
+        ],
+        "nanogpt_shape": [
+          768
+        ],
+        "exact_match": true,
+        "transpose_match": false
+      },
+      {
+        "name": "transformer.h.3.ln_2.weight",
+        "hf_shape": [
+          768
+        ],
+        "nanogpt_shape": [
+          768
+        ],
+        "exact_match": true,
+        "transpose_match": false
+      },
+      {
+        "name": "transformer.h.3.mlp.c_fc.bias",
+        "hf_shape": [
+          3072
+        ],
+        "nanogpt_shape": [
+          3072
+        ],
+        "exact_match": true,
+        "transpose_match": false
+      },
+      {
+        "name": "transformer.h.3.mlp.c_fc.weight",
+        "hf_shape": [
+          768,
+          3072
+        ],
+        "nanogpt_shape": [
+          3072,
+          768
+        ],
+        "exact_match": false,
+        "transpose_match": true
+      },
+      {
+        "name": "transformer.h.3.mlp.c_proj.bias",
+        "hf_shape": [
+          768
+        ],
+        "nanogpt_shape": [
+          768
+        ],
+        "exact_match": true,
+        "transpose_match": false
+      },
+      {
+        "name": "transformer.h.3.mlp.c_proj.weight",
+        "hf_shape": [
+          3072,
+          768
+        ],
+        "nanogpt_shape": [
+          768,
+          3072
+        ],
+        "exact_match": false,
+        "transpose_match": true
+      },
+      {
+        "name": "transformer.h.4.attn.c_attn.bias",
+        "hf_shape": [
+          2304
+        ],
+        "nanogpt_shape": [
+          2304
+        ],
+        "exact_match": true,
+        "transpose_match": false
+      },
+      {
+        "name": "transformer.h.4.attn.c_attn.weight",
+        "hf_shape": [
+          768,
+          2304
+        ],
+        "nanogpt_shape": [
+          2304,
+          768
+        ],
+        "exact_match": false,
+        "transpose_match": true
+      },
+      {
+        "name": "transformer.h.4.attn.c_proj.bias",
+        "hf_shape": [
+          768
+        ],
+        "nanogpt_shape": [
+          768
+        ],
+        "exact_match": true,
+        "transpose_match": false
+      },
+      {
+        "name": "transformer.h.4.attn.c_proj.weight",
+        "hf_shape": [
+          768,
+          768
+        ],
+        "nanogpt_shape": [
+          768,
+          768
+        ],
+        "exact_match": true,
+        "transpose_match": true
+      },
+      {
+        "name": "transformer.h.4.ln_1.bias",
+        "hf_shape": [
+          768
+        ],
+        "nanogpt_shape": [
+          768
+        ],
+        "exact_match": true,
+        "transpose_match": false
+      },
+      {
+        "name": "transformer.h.4.ln_1.weight",
+        "hf_shape": [
+          768
+        ],
+        "nanogpt_shape": [
+          768
+        ],
+        "exact_match": true,
+        "transpose_match": false
+      },
+      {
+        "name": "transformer.h.4.ln_2.bias",
+        "hf_shape": [
+          768
+        ],
+        "nanogpt_shape": [
+          768
+        ],
+        "exact_match": true,
+        "transpose_match": false
+      },
+      {
+        "name": "transformer.h.4.ln_2.weight",
+        "hf_shape": [
+          768
+        ],
+        "nanogpt_shape": [
+          768
+        ],
+        "exact_match": true,
+        "transpose_match": false
+      },
+      {
+        "name": "transformer.h.4.mlp.c_fc.bias",
+        "hf_shape": [
+          3072
+        ],
+        "nanogpt_shape": [
+          3072
+        ],
+        "exact_match": true,
+        "transpose_match": false
+      },
+      {
+        "name": "transformer.h.4.mlp.c_fc.weight",
+        "hf_shape": [
+          768,
+          3072
+        ],
+        "nanogpt_shape": [
+          3072,
+          768
+        ],
+        "exact_match": false,
+        "transpose_match": true
+      },
+      {
+        "name": "transformer.h.4.mlp.c_proj.bias",
+        "hf_shape": [
+          768
+        ],
+        "nanogpt_shape": [
+          768
+        ],
+        "exact_match": true,
+        "transpose_match": false
+      },
+      {
+        "name": "transformer.h.4.mlp.c_proj.weight",
+        "hf_shape": [
+          3072,
+          768
+        ],
+        "nanogpt_shape": [
+          768,
+          3072
+        ],
+        "exact_match": false,
+        "transpose_match": true
+      },
+      {
+        "name": "transformer.h.5.attn.c_attn.bias",
+        "hf_shape": [
+          2304
+        ],
+        "nanogpt_shape": [
+          2304
+        ],
+        "exact_match": true,
+        "transpose_match": false
+      },
+      {
+        "name": "transformer.h.5.attn.c_attn.weight",
+        "hf_shape": [
+          768,
+          2304
+        ],
+        "nanogpt_shape": [
+          2304,
+          768
+        ],
+        "exact_match": false,
+        "transpose_match": true
+      },
+      {
+        "name": "transformer.h.5.attn.c_proj.bias",
+        "hf_shape": [
+          768
+        ],
+        "nanogpt_shape": [
+          768
+        ],
+        "exact_match": true,
+        "transpose_match": false
+      },
+      {
+        "name": "transformer.h.5.attn.c_proj.weight",
+        "hf_shape": [
+          768,
+          768
+        ],
+        "nanogpt_shape": [
+          768,
+          768
+        ],
+        "exact_match": true,
+        "transpose_match": true
+      },
+      {
+        "name": "transformer.h.5.ln_1.bias",
+        "hf_shape": [
+          768
+        ],
+        "nanogpt_shape": [
+          768
+        ],
+        "exact_match": true,
+        "transpose_match": false
+      },
+      {
+        "name": "transformer.h.5.ln_1.weight",
+        "hf_shape": [
+          768
+        ],
+        "nanogpt_shape": [
+          768
+        ],
+        "exact_match": true,
+        "transpose_match": false
+      },
+      {
+        "name": "transformer.h.5.ln_2.bias",
+        "hf_shape": [
+          768
+        ],
+        "nanogpt_shape": [
+          768
+        ],
+        "exact_match": true,
+        "transpose_match": false
+      },
+      {
+        "name": "transformer.h.5.ln_2.weight",
+        "hf_shape": [
+          768
+        ],
+        "nanogpt_shape": [
+          768
+        ],
+        "exact_match": true,
+        "transpose_match": false
+      },
+      {
+        "name": "transformer.h.5.mlp.c_fc.bias",
+        "hf_shape": [
+          3072
+        ],
+        "nanogpt_shape": [
+          3072
+        ],
+        "exact_match": true,
+        "transpose_match": false
+      },
+      {
+        "name": "transformer.h.5.mlp.c_fc.weight",
+        "hf_shape": [
+          768,
+          3072
+        ],
+        "nanogpt_shape": [
+          3072,
+          768
+        ],
+        "exact_match": false,
+        "transpose_match": true
+      },
+      {
+        "name": "transformer.h.5.mlp.c_proj.bias",
+        "hf_shape": [
+          768
+        ],
+        "nanogpt_shape": [
+          768
+        ],
+        "exact_match": true,
+        "transpose_match": false
+      },
+      {
+        "name": "transformer.h.5.mlp.c_proj.weight",
+        "hf_shape": [
+          3072,
+          768
+        ],
+        "nanogpt_shape": [
+          768,
+          3072
+        ],
+        "exact_match": false,
+        "transpose_match": true
+      },
+      {
+        "name": "transformer.h.6.attn.c_attn.bias",
+        "hf_shape": [
+          2304
+        ],
+        "nanogpt_shape": [
+          2304
+        ],
+        "exact_match": true,
+        "transpose_match": false
+      },
+      {
+        "name": "transformer.h.6.attn.c_attn.weight",
+        "hf_shape": [
+          768,
+          2304
+        ],
+        "nanogpt_shape": [
+          2304,
+          768
+        ],
+        "exact_match": false,
+        "transpose_match": true
+      },
+      {
+        "name": "transformer.h.6.attn.c_proj.bias",
+        "hf_shape": [
+          768
+        ],
+        "nanogpt_shape": [
+          768
+        ],
+        "exact_match": true,
+        "transpose_match": false
+      },
+      {
+        "name": "transformer.h.6.attn.c_proj.weight",
+        "hf_shape": [
+          768,
+          768
+        ],
+        "nanogpt_shape": [
+          768,
+          768
+        ],
+        "exact_match": true,
+        "transpose_match": true
+      },
+      {
+        "name": "transformer.h.6.ln_1.bias",
+        "hf_shape": [
+          768
+        ],
+        "nanogpt_shape": [
+          768
+        ],
+        "exact_match": true,
+        "transpose_match": false
+      },
+      {
+        "name": "transformer.h.6.ln_1.weight",
+        "hf_shape": [
+          768
+        ],
+        "nanogpt_shape": [
+          768
+        ],
+        "exact_match": true,
+        "transpose_match": false
+      },
+      {
+        "name": "transformer.h.6.ln_2.bias",
+        "hf_shape": [
+          768
+        ],
+        "nanogpt_shape": [
+          768
+        ],
+        "exact_match": true,
+        "transpose_match": false
+      },
+      {
+        "name": "transformer.h.6.ln_2.weight",
+        "hf_shape": [
+          768
+        ],
+        "nanogpt_shape": [
+          768
+        ],
+        "exact_match": true,
+        "transpose_match": false
+      },
+      {
+        "name": "transformer.h.6.mlp.c_fc.bias",
+        "hf_shape": [
+          3072
+        ],
+        "nanogpt_shape": [
+          3072
+        ],
+        "exact_match": true,
+        "transpose_match": false
+      },
+      {
+        "name": "transformer.h.6.mlp.c_fc.weight",
+        "hf_shape": [
+          768,
+          3072
+        ],
+        "nanogpt_shape": [
+          3072,
+          768
+        ],
+        "exact_match": false,
+        "transpose_match": true
+      },
+      {
+        "name": "transformer.h.6.mlp.c_proj.bias",
+        "hf_shape": [
+          768
+        ],
+        "nanogpt_shape": [
+          768
+        ],
+        "exact_match": true,
+        "transpose_match": false
+      },
+      {
+        "name": "transformer.h.6.mlp.c_proj.weight",
+        "hf_shape": [
+          3072,
+          768
+        ],
+        "nanogpt_shape": [
+          768,
+          3072
+        ],
+        "exact_match": false,
+        "transpose_match": true
+      },
+      {
+        "name": "transformer.h.7.attn.c_attn.bias",
+        "hf_shape": [
+          2304
+        ],
+        "nanogpt_shape": [
+          2304
+        ],
+        "exact_match": true,
+        "transpose_match": false
+      },
+      {
+        "name": "transformer.h.7.attn.c_attn.weight",
+        "hf_shape": [
+          768,
+          2304
+        ],
+        "nanogpt_shape": [
+          2304,
+          768
+        ],
+        "exact_match": false,
+        "transpose_match": true
+      },
+      {
+        "name": "transformer.h.7.attn.c_proj.bias",
+        "hf_shape": [
+          768
+        ],
+        "nanogpt_shape": [
+          768
+        ],
+        "exact_match": true,
+        "transpose_match": false
+      },
+      {
+        "name": "transformer.h.7.attn.c_proj.weight",
+        "hf_shape": [
+          768,
+          768
+        ],
+        "nanogpt_shape": [
+          768,
+          768
+        ],
+        "exact_match": true,
+        "transpose_match": true
+      },
+      {
+        "name": "transformer.h.7.ln_1.bias",
+        "hf_shape": [
+          768
+        ],
+        "nanogpt_shape": [
+          768
+        ],
+        "exact_match": true,
+        "transpose_match": false
+      },
+      {
+        "name": "transformer.h.7.ln_1.weight",
+        "hf_shape": [
+          768
+        ],
+        "nanogpt_shape": [
+          768
+        ],
+        "exact_match": true,
+        "transpose_match": false
+      },
+      {
+        "name": "transformer.h.7.ln_2.bias",
+        "hf_shape": [
+          768
+        ],
+        "nanogpt_shape": [
+          768
+        ],
+        "exact_match": true,
+        "transpose_match": false
+      },
+      {
+        "name": "transformer.h.7.ln_2.weight",
+        "hf_shape": [
+          768
+        ],
+        "nanogpt_shape": [
+          768
+        ],
+        "exact_match": true,
+        "transpose_match": false
+      },
+      {
+        "name": "transformer.h.7.mlp.c_fc.bias",
+        "hf_shape": [
+          3072
+        ],
+        "nanogpt_shape": [
+          3072
+        ],
+        "exact_match": true,
+        "transpose_match": false
+      },
+      {
+        "name": "transformer.h.7.mlp.c_fc.weight",
+        "hf_shape": [
+          768,
+          3072
+        ],
+        "nanogpt_shape": [
+          3072,
+          768
+        ],
+        "exact_match": false,
+        "transpose_match": true
+      },
+      {
+        "name": "transformer.h.7.mlp.c_proj.bias",
+        "hf_shape": [
+          768
+        ],
+        "nanogpt_shape": [
+          768
+        ],
+        "exact_match": true,
+        "transpose_match": false
+      },
+      {
+        "name": "transformer.h.7.mlp.c_proj.weight",
+        "hf_shape": [
+          3072,
+          768
+        ],
+        "nanogpt_shape": [
+          768,
+          3072
+        ],
+        "exact_match": false,
+        "transpose_match": true
+      },
+      {
+        "name": "transformer.h.8.attn.c_attn.bias",
+        "hf_shape": [
+          2304
+        ],
+        "nanogpt_shape": [
+          2304
+        ],
+        "exact_match": true,
+        "transpose_match": false
+      },
+      {
+        "name": "transformer.h.8.attn.c_attn.weight",
+        "hf_shape": [
+          768,
+          2304
+        ],
+        "nanogpt_shape": [
+          2304,
+          768
+        ],
+        "exact_match": false,
+        "transpose_match": true
+      },
+      {
+        "name": "transformer.h.8.attn.c_proj.bias",
+        "hf_shape": [
+          768
+        ],
+        "nanogpt_shape": [
+          768
+        ],
+        "exact_match": true,
+        "transpose_match": false
+      },
+      {
+        "name": "transformer.h.8.attn.c_proj.weight",
+        "hf_shape": [
+          768,
+          768
+        ],
+        "nanogpt_shape": [
+          768,
+          768
+        ],
+        "exact_match": true,
+        "transpose_match": true
+      },
+      {
+        "name": "transformer.h.8.ln_1.bias",
+        "hf_shape": [
+          768
+        ],
+        "nanogpt_shape": [
+          768
+        ],
+        "exact_match": true,
+        "transpose_match": false
+      },
+      {
+        "name": "transformer.h.8.ln_1.weight",
+        "hf_shape": [
+          768
+        ],
+        "nanogpt_shape": [
+          768
+        ],
+        "exact_match": true,
+        "transpose_match": false
+      },
+      {
+        "name": "transformer.h.8.ln_2.bias",
+        "hf_shape": [
+          768
+        ],
+        "nanogpt_shape": [
+          768
+        ],
+        "exact_match": true,
+        "transpose_match": false
+      },
+      {
+        "name": "transformer.h.8.ln_2.weight",
+        "hf_shape": [
+          768
+        ],
+        "nanogpt_shape": [
+          768
+        ],
+        "exact_match": true,
+        "transpose_match": false
+      },
+      {
+        "name": "transformer.h.8.mlp.c_fc.bias",
+        "hf_shape": [
+          3072
+        ],
+        "nanogpt_shape": [
+          3072
+        ],
+        "exact_match": true,
+        "transpose_match": false
+      },
+      {
+        "name": "transformer.h.8.mlp.c_fc.weight",
+        "hf_shape": [
+          768,
+          3072
+        ],
+        "nanogpt_shape": [
+          3072,
+          768
+        ],
+        "exact_match": false,
+        "transpose_match": true
+      },
+      {
+        "name": "transformer.h.8.mlp.c_proj.bias",
+        "hf_shape": [
+          768
+        ],
+        "nanogpt_shape": [
+          768
+        ],
+        "exact_match": true,
+        "transpose_match": false
+      },
+      {
+        "name": "transformer.h.8.mlp.c_proj.weight",
+        "hf_shape": [
+          3072,
+          768
+        ],
+        "nanogpt_shape": [
+          768,
+          3072
+        ],
+        "exact_match": false,
+        "transpose_match": true
+      },
+      {
+        "name": "transformer.h.9.attn.c_attn.bias",
+        "hf_shape": [
+          2304
+        ],
+        "nanogpt_shape": [
+          2304
+        ],
+        "exact_match": true,
+        "transpose_match": false
+      },
+      {
+        "name": "transformer.h.9.attn.c_attn.weight",
+        "hf_shape": [
+          768,
+          2304
+        ],
+        "nanogpt_shape": [
+          2304,
+          768
+        ],
+        "exact_match": false,
+        "transpose_match": true
+      },
+      {
+        "name": "transformer.h.9.attn.c_proj.bias",
+        "hf_shape": [
+          768
+        ],
+        "nanogpt_shape": [
+          768
+        ],
+        "exact_match": true,
+        "transpose_match": false
+      },
+      {
+        "name": "transformer.h.9.attn.c_proj.weight",
+        "hf_shape": [
+          768,
+          768
+        ],
+        "nanogpt_shape": [
+          768,
+          768
+        ],
+        "exact_match": true,
+        "transpose_match": true
+      },
+      {
+        "name": "transformer.h.9.ln_1.bias",
+        "hf_shape": [
+          768
+        ],
+        "nanogpt_shape": [
+          768
+        ],
+        "exact_match": true,
+        "transpose_match": false
+      },
+      {
+        "name": "transformer.h.9.ln_1.weight",
+        "hf_shape": [
+          768
+        ],
+        "nanogpt_shape": [
+          768
+        ],
+        "exact_match": true,
+        "transpose_match": false
+      },
+      {
+        "name": "transformer.h.9.ln_2.bias",
+        "hf_shape": [
+          768
+        ],
+        "nanogpt_shape": [
+          768
+        ],
+        "exact_match": true,
+        "transpose_match": false
+      },
+      {
+        "name": "transformer.h.9.ln_2.weight",
+        "hf_shape": [
+          768
+        ],
+        "nanogpt_shape": [
+          768
+        ],
+        "exact_match": true,
+        "transpose_match": false
+      },
+      {
+        "name": "transformer.h.9.mlp.c_fc.bias",
+        "hf_shape": [
+          3072
+        ],
+        "nanogpt_shape": [
+          3072
+        ],
+        "exact_match": true,
+        "transpose_match": false
+      },
+      {
+        "name": "transformer.h.9.mlp.c_fc.weight",
+        "hf_shape": [
+          768,
+          3072
+        ],
+        "nanogpt_shape": [
+          3072,
+          768
+        ],
+        "exact_match": false,
+        "transpose_match": true
+      },
+      {
+        "name": "transformer.h.9.mlp.c_proj.bias",
+        "hf_shape": [
+          768
+        ],
+        "nanogpt_shape": [
+          768
+        ],
+        "exact_match": true,
+        "transpose_match": false
+      },
+      {
+        "name": "transformer.h.9.mlp.c_proj.weight",
+        "hf_shape": [
+          3072,
+          768
+        ],
+        "nanogpt_shape": [
+          768,
+          3072
+        ],
+        "exact_match": false,
+        "transpose_match": true
+      },
+      {
+        "name": "transformer.ln_f.bias",
+        "hf_shape": [
+          768
+        ],
+        "nanogpt_shape": [
+          768
+        ],
+        "exact_match": true,
+        "transpose_match": false
+      },
+      {
+        "name": "transformer.ln_f.weight",
+        "hf_shape": [
+          768
+        ],
+        "nanogpt_shape": [
+          768
+        ],
+        "exact_match": true,
+        "transpose_match": false
+      },
+      {
+        "name": "transformer.wpe.weight",
+        "hf_shape": [
+          1024,
+          768
+        ],
+        "nanogpt_shape": [
+          1024,
+          768
+        ],
+        "exact_match": true,
+        "transpose_match": false
+      },
+      {
+        "name": "transformer.wte.weight",
+        "hf_shape": [
+          50257,
+          768
+        ],
+        "nanogpt_shape": [
+          50257,
+          768
+        ],
+        "exact_match": true,
+        "transpose_match": false
+      }
+    ]
+  },
+  "prompts": [
+    {
+      "sample_id": 0,
+      "prompt": "Once upon a time",
+      "prompt_token_ids": [
+        7454,
+        2402,
+        257,
+        640
+      ],
+      "hf_generated_token_ids": [
+        11,
+        262,
+        995,
+        373,
+        257,
+        1295,
+        286,
+        1049,
+        8737,
+        290,
+        1049,
+        3514,
+        13,
+        383,
+        995,
+        373,
+        257,
+        1295,
+        286,
+        1049,
+        3514,
+        11,
+        290,
+        262,
+        995,
+        373,
+        257,
+        1295,
+        286,
+        1049,
+        3514,
+        13,
+        383,
+        995,
+        373,
+        257,
+        1295,
+        286,
+        1049,
+        3514,
+        11,
+        290,
+        262,
+        995,
+        373,
+        257,
+        1295,
+        286,
+        1049,
+        3514,
+        13,
+        383,
+        995,
+        373,
+        257,
+        1295,
+        286,
+        1049,
+        3514,
+        11,
+        290,
+        262,
+        995,
+        373,
+        257,
+        1295,
+        286,
+        1049,
+        3514,
+        13,
+        383,
+        995,
+        373,
+        257,
+        1295,
+        286,
+        1049,
+        3514,
+        11,
+        290,
+        262,
+        995,
+        373,
+        257,
+        1295,
+        286,
+        1049,
+        3514,
+        13,
+        383,
+        995,
+        373,
+        257,
+        1295,
+        286,
+        1049,
+        3514,
+        11,
+        290,
+        262
+      ],
+      "nanogpt_generated_token_ids": [
+        11,
+        262,
+        995,
+        373,
+        257,
+        1295,
+        286,
+        1049,
+        8737,
+        290,
+        1049,
+        3514,
+        13,
+        383,
+        995,
+        373,
+        257,
+        1295,
+        286,
+        1049,
+        3514,
+        11,
+        290,
+        262,
+        995,
+        373,
+        257,
+        1295,
+        286,
+        1049,
+        3514,
+        13,
+        383,
+        995,
+        373,
+        257,
+        1295,
+        286,
+        1049,
+        3514,
+        11,
+        290,
+        262,
+        995,
+        373,
+        257,
+        1295,
+        286,
+        1049,
+        3514,
+        13,
+        383,
+        995,
+        373,
+        257,
+        1295,
+        286,
+        1049,
+        3514,
+        11,
+        290,
+        262,
+        995,
+        373,
+        257,
+        1295,
+        286,
+        1049,
+        3514,
+        13,
+        383,
+        995,
+        373,
+        257,
+        1295,
+        286,
+        1049,
+        3514,
+        11,
+        290,
+        262,
+        995,
+        373,
+        257,
+        1295,
+        286,
+        1049,
+        3514,
+        13,
+        383,
+        995,
+        373,
+        257,
+        1295,
+        286,
+        1049,
+        3514,
+        11,
+        290,
+        262
+      ],
+      "generated_token_ids_equal": true,
+      "hf_generated_text": ", the world was a place of great beauty and great danger. The world was a place of great danger, and the world was a place of great danger. The world was a place of great danger, and the world was a place of great danger. The world was a place of great danger, and the world was a place of great danger. The world was a place of great danger, and the world was a place of great danger. The world was a place of great danger, and the",
+      "nanogpt_generated_text": ", the world was a place of great beauty and great danger. The world was a place of great danger, and the world was a place of great danger. The world was a place of great danger, and the world was a place of great danger. The world was a place of great danger, and the world was a place of great danger. The world was a place of great danger, and the world was a place of great danger. The world was a place of great danger, and the",
+      "first_forward_logits_max_abs_error": 0.02802276611328125,
+      "first_forward_logits_mean_abs_error": 0.01294151321053505,
+      "hf_generation_seconds": 3.5642314001452178,
+      "nanogpt_generation_seconds": 6.379620800027624
+    },
+    {
+      "sample_id": 1,
+      "prompt": "In the middle of the night",
+      "prompt_token_ids": [
+        818,
+        262,
+        3504,
+        286,
+        262,
+        1755
+      ],
+      "hf_generated_token_ids": [
+        11,
+        262,
+        1644,
+        547,
+        1444,
+        284,
+        262,
+        3715,
+        13,
+        198,
+        198,
+        1,
+        40,
+        373,
+        287,
+        262,
+        3504,
+        286,
+        262,
+        1755,
+        11,
+        290,
+        314,
+        2497,
+        257,
+        582,
+        351,
+        257,
+        2485,
+        553,
+        531,
+        262,
+        3117,
+        338,
+        2802,
+        11,
+        508,
+        373,
+        407,
+        2950,
+        287,
+        262,
+        4519,
+        13,
+        198,
+        198,
+        1,
+        40,
+        373,
+        655,
+        2111,
+        284,
+        651,
+        503,
+        286,
+        262,
+        1097,
+        290,
+        314,
+        2497,
+        257,
+        582,
+        351,
+        257,
+        2485,
+        13,
+        314,
+        373,
+        655,
+        2111,
+        284,
+        651,
+        503,
+        286,
+        262,
+        1097,
+        290,
+        314,
+        2497,
+        257,
+        582,
+        351,
+        257,
+        2485,
+        553,
+        531,
+        262,
+        3117,
+        338,
+        2802,
+        11,
+        508,
+        373,
+        407,
+        2950,
+        287,
+        262,
+        4519,
+        13,
+        198
+      ],
+      "nanogpt_generated_token_ids": [
+        11,
+        262,
+        1644,
+        547,
+        1444,
+        284,
+        262,
+        3715,
+        13,
+        198,
+        198,
+        1,
+        40,
+        373,
+        287,
+        262,
+        3504,
+        286,
+        262,
+        1755,
+        11,
+        290,
+        314,
+        2497,
+        257,
+        582,
+        351,
+        257,
+        2485,
+        553,
+        531,
+        262,
+        3117,
+        338,
+        2802,
+        11,
+        508,
+        373,
+        407,
+        2950,
+        287,
+        262,
+        4519,
+        13,
+        198,
+        198,
+        1,
+        40,
+        373,
+        655,
+        2111,
+        284,
+        651,
+        503,
+        286,
+        262,
+        1097,
+        290,
+        314,
+        2497,
+        257,
+        582,
+        351,
+        257,
+        2485,
+        13,
+        314,
+        373,
+        655,
+        2111,
+        284,
+        651,
+        503,
+        286,
+        262,
+        1097,
+        290,
+        314,
+        2497,
+        257,
+        582,
+        351,
+        257,
+        2485,
+        553,
+        531,
+        262,
+        3117,
+        338,
+        2802,
+        11,
+        508,
+        373,
+        407,
+        2950,
+        287,
+        262,
+        4519,
+        13,
+        198
+      ],
+      "generated_token_ids_equal": true,
+      "hf_generated_text": ", the police were called to the scene.\n\n\"I was in the middle of the night, and I saw a man with a gun,\" said the victim's mother, who was not involved in the incident.\n\n\"I was just trying to get out of the car and I saw a man with a gun. I was just trying to get out of the car and I saw a man with a gun,\" said the victim's mother, who was not involved in the incident.\n",
+      "nanogpt_generated_text": ", the police were called to the scene.\n\n\"I was in the middle of the night, and I saw a man with a gun,\" said the victim's mother, who was not involved in the incident.\n\n\"I was just trying to get out of the car and I saw a man with a gun. I was just trying to get out of the car and I saw a man with a gun,\" said the victim's mother, who was not involved in the incident.\n",
+      "first_forward_logits_max_abs_error": 0.01898956298828125,
+      "first_forward_logits_mean_abs_error": 0.010203712619841099,
+      "hf_generation_seconds": 3.5594289998989552,
+      "nanogpt_generation_seconds": 6.512479700148106
+    },
+    {
+      "sample_id": 2,
+      "prompt": "The most important lesson I learned was",
+      "prompt_token_ids": [
+        464,
+        749,
+        1593,
+        11483,
+        314,
+        4499,
+        373
+      ],
+      "hf_generated_token_ids": [
+        326,
+        345,
+        460,
+        470,
+        655,
+        910,
+        11,
+        366,
+        40,
+        1101,
+        1016,
+        284,
+        466,
+        428,
+        526,
+        921,
+        423,
+        284,
+        910,
+        11,
+        366,
+        40,
+        1101,
+        1016,
+        284,
+        466,
+        428,
+        526,
+        843,
+        788,
+        345,
+        423,
+        284,
+        910,
+        11,
+        366,
+        40,
+        1101,
+        1016,
+        284,
+        466,
+        428,
+        526,
+        843,
+        788,
+        345,
+        423,
+        284,
+        910,
+        11,
+        366,
+        40,
+        1101,
+        1016,
+        284,
+        466,
+        428,
+        526,
+        843,
+        788,
+        345,
+        423,
+        284,
+        910,
+        11,
+        366,
+        40,
+        1101,
+        1016,
+        284,
+        466,
+        428,
+        526,
+        843,
+        788,
+        345,
+        423,
+        284,
+        910,
+        11,
+        366,
+        40,
+        1101,
+        1016,
+        284,
+        466,
+        428,
+        526,
+        843,
+        788,
+        345,
+        423,
+        284,
+        910,
+        11,
+        366,
+        40,
+        1101,
+        1016,
+        284
+      ],
+      "nanogpt_generated_token_ids": [
+        326,
+        345,
+        460,
+        470,
+        655,
+        910,
+        11,
+        366,
+        40,
+        1101,
+        1016,
+        284,
+        466,
+        428,
+        526,
+        921,
+        423,
+        284,
+        910,
+        11,
+        366,
+        40,
+        1101,
+        1016,
+        284,
+        466,
+        428,
+        526,
+        843,
+        788,
+        345,
+        423,
+        284,
+        910,
+        11,
+        366,
+        40,
+        1101,
+        1016,
+        284,
+        466,
+        428,
+        526,
+        843,
+        788,
+        345,
+        423,
+        284,
+        910,
+        11,
+        366,
+        40,
+        1101,
+        1016,
+        284,
+        466,
+        428,
+        526,
+        843,
+        788,
+        345,
+        423,
+        284,
+        910,
+        11,
+        366,
+        40,
+        1101,
+        1016,
+        284,
+        466,
+        428,
+        526,
+        843,
+        788,
+        345,
+        423,
+        284,
+        910,
+        11,
+        366,
+        40,
+        1101,
+        1016,
+        284,
+        466,
+        428,
+        526,
+        843,
+        788,
+        345,
+        423,
+        284,
+        910,
+        11,
+        366,
+        40,
+        1101,
+        1016,
+        284
+      ],
+      "generated_token_ids_equal": true,
+      "hf_generated_text": " that you can't just say, \"I'm going to do this.\" You have to say, \"I'm going to do this.\" And then you have to say, \"I'm going to do this.\" And then you have to say, \"I'm going to do this.\" And then you have to say, \"I'm going to do this.\" And then you have to say, \"I'm going to do this.\" And then you have to say, \"I'm going to",
+      "nanogpt_generated_text": " that you can't just say, \"I'm going to do this.\" You have to say, \"I'm going to do this.\" And then you have to say, \"I'm going to do this.\" And then you have to say, \"I'm going to do this.\" And then you have to say, \"I'm going to do this.\" And then you have to say, \"I'm going to do this.\" And then you have to say, \"I'm going to",
+      "first_forward_logits_max_abs_error": 0.030181884765625,
+      "first_forward_logits_mean_abs_error": 0.015624315477907658,
+      "hf_generation_seconds": 3.6264438999351114,
+      "nanogpt_generation_seconds": 6.592488000169396
+    },
+    {
+      "sample_id": 3,
+      "prompt": "Scientists discovered a strange signal from",
+      "prompt_token_ids": [
+        29193,
+        5071,
+        257,
+        6283,
+        6737,
+        422
+      ],
+      "hf_generated_token_ids": [
+        262,
+        3825,
+        326,
+        714,
+        307,
+        262,
+        6737,
+        286,
+        257,
+        31733,
+        13,
+        198,
+        198,
+        464,
+        6737,
+        373,
+        12326,
+        416,
+        262,
+        14154,
+        5362,
+        16807,
+        319,
+        2901,
+        807,
+        11,
+        2321,
+        13,
+        383,
+        16807,
+        373,
+        5611,
+        422,
+        15725,
+        49433,
+        3701,
+        5221,
+        9327,
+        287,
+        4744,
+        13,
+        198,
+        198,
+        464,
+        14154,
+        5362,
+        16807,
+        318,
+        257,
+        22849,
+        1628,
+        286,
+        8884,
+        11,
+        262,
+        3427,
+        4687,
+        7732,
+        290,
+        262,
+        8200,
+        4687,
+        7732,
+        13,
+        383,
+        14154,
+        5362,
+        13066,
+        263,
+        290,
+        663,
+        734,
+        25863,
+        9073,
+        547,
+        3562,
+        11,
+        4166,
+        290,
+        16030,
+        379,
+        262,
+        4687,
+        5800,
+        5136,
+        287,
+        27437,
+        11,
+        7492,
+        13,
+        198,
+        198,
+        464,
+        14154,
+        5362,
+        13066,
+        263,
+        290,
+        663,
+        734
+      ],
+      "nanogpt_generated_token_ids": [
+        262,
+        3825,
+        326,
+        714,
+        307,
+        262,
+        6737,
+        286,
+        257,
+        31733,
+        13,
+        198,
+        198,
+        464,
+        6737,
+        373,
+        12326,
+        416,
+        262,
+        14154,
+        5362,
+        16807,
+        319,
+        2901,
+        807,
+        11,
+        2321,
+        13,
+        383,
+        16807,
+        373,
+        5611,
+        422,
+        15725,
+        49433,
+        3701,
+        5221,
+        9327,
+        287,
+        4744,
+        13,
+        198,
+        198,
+        464,
+        14154,
+        5362,
+        16807,
+        318,
+        257,
+        22849,
+        1628,
+        286,
+        8884,
+        11,
+        262,
+        3427,
+        4687,
+        7732,
+        290,
+        262,
+        8200,
+        4687,
+        7732,
+        13,
+        383,
+        14154,
+        5362,
+        13066,
+        263,
+        290,
+        663,
+        734,
+        25863,
+        9073,
+        547,
+        3562,
+        11,
+        4166,
+        290,
+        16030,
+        379,
+        262,
+        4687,
+        5800,
+        5136,
+        287,
+        27437,
+        11,
+        7492,
+        13,
+        198,
+        198,
+        464,
+        14154,
+        5362,
+        13066,
+        263,
+        290,
+        663,
+        734
+      ],
+      "generated_token_ids_equal": true,
+      "hf_generated_text": " the Sun that could be the signal of a comet.\n\nThe signal was detected by the Cassini spacecraft on July 8, 2012. The spacecraft was launched from Cape Canaveral Air Force Station in Florida.\n\nThe Cassini spacecraft is a cooperative project of NASA, the European Space Agency and the Italian Space Agency. The Cassini orbiter and its two onboard cameras were designed, developed and assembled at the Space Science Institute in Boulder, Colorado.\n\nThe Cassini orbiter and its two",
+      "nanogpt_generated_text": " the Sun that could be the signal of a comet.\n\nThe signal was detected by the Cassini spacecraft on July 8, 2012. The spacecraft was launched from Cape Canaveral Air Force Station in Florida.\n\nThe Cassini spacecraft is a cooperative project of NASA, the European Space Agency and the Italian Space Agency. The Cassini orbiter and its two onboard cameras were designed, developed and assembled at the Space Science Institute in Boulder, Colorado.\n\nThe Cassini orbiter and its two",
+      "first_forward_logits_max_abs_error": 0.02643585205078125,
+      "first_forward_logits_mean_abs_error": 0.014587904326617718,
+      "hf_generation_seconds": 3.396470599807799,
+      "nanogpt_generation_seconds": 6.631490400061011
+    },
+    {
+      "sample_id": 4,
+      "prompt": "At the edge of the old forest",
+      "prompt_token_ids": [
+        2953,
+        262,
+        5743,
+        286,
+        262,
+        1468,
+        8222
+      ],
+      "hf_generated_token_ids": [
+        11,
+        257,
+        1402,
+        7404,
+        373,
+        3170,
+        13,
+        383,
+        7404,
+        373,
+        3170,
+        319,
+        262,
+        5743,
+        286,
+        262,
+        8222,
+        11,
+        290,
+        262,
+        7404,
+        373,
+        3170,
+        319,
+        262,
+        5743,
+        286,
+        262,
+        8222,
+        13,
+        383,
+        7404,
+        373,
+        3170,
+        319,
+        262,
+        5743,
+        286,
+        262,
+        8222,
+        11,
+        290,
+        262,
+        7404,
+        373,
+        3170,
+        319,
+        262,
+        5743,
+        286,
+        262,
+        8222,
+        13,
+        383,
+        7404,
+        373,
+        3170,
+        319,
+        262,
+        5743,
+        286,
+        262,
+        8222,
+        11,
+        290,
+        262,
+        7404,
+        373,
+        3170,
+        319,
+        262,
+        5743,
+        286,
+        262,
+        8222,
+        13,
+        383,
+        7404,
+        373,
+        3170,
+        319,
+        262,
+        5743,
+        286,
+        262,
+        8222,
+        11,
+        290,
+        262,
+        7404,
+        373,
+        3170,
+        319,
+        262,
+        5743,
+        286,
+        262,
+        8222,
+        13,
+        383
+      ],
+      "nanogpt_generated_token_ids": [
+        11,
+        257,
+        1402,
+        7404,
+        373,
+        3170,
+        13,
+        383,
+        7404,
+        373,
+        3170,
+        319,
+        262,
+        5743,
+        286,
+        262,
+        8222,
+        11,
+        290,
+        262,
+        7404,
+        373,
+        3170,
+        319,
+        262,
+        5743,
+        286,
+        262,
+        8222,
+        13,
+        383,
+        7404,
+        373,
+        3170,
+        319,
+        262,
+        5743,
+        286,
+        262,
+        8222,
+        11,
+        290,
+        262,
+        7404,
+        373,
+        3170,
+        319,
+        262,
+        5743,
+        286,
+        262,
+        8222,
+        13,
+        383,
+        7404,
+        373,
+        3170,
+        319,
+        262,
+        5743,
+        286,
+        262,
+        8222,
+        11,
+        290,
+        262,
+        7404,
+        373,
+        3170,
+        319,
+        262,
+        5743,
+        286,
+        262,
+        8222,
+        13,
+        383,
+        7404,
+        373,
+        3170,
+        319,
+        262,
+        5743,
+        286,
+        262,
+        8222,
+        11,
+        290,
+        262,
+        7404,
+        373,
+        3170,
+        319,
+        262,
+        5743,
+        286,
+        262,
+        8222,
+        13,
+        383
+      ],
+      "generated_token_ids_equal": true,
+      "hf_generated_text": ", a small village was built. The village was built on the edge of the forest, and the village was built on the edge of the forest. The village was built on the edge of the forest, and the village was built on the edge of the forest. The village was built on the edge of the forest, and the village was built on the edge of the forest. The village was built on the edge of the forest, and the village was built on the edge of the forest. The",
+      "nanogpt_generated_text": ", a small village was built. The village was built on the edge of the forest, and the village was built on the edge of the forest. The village was built on the edge of the forest, and the village was built on the edge of the forest. The village was built on the edge of the forest, and the village was built on the edge of the forest. The village was built on the edge of the forest, and the village was built on the edge of the forest. The",
+      "first_forward_logits_max_abs_error": 0.0130615234375,
+      "first_forward_logits_mean_abs_error": 0.002973011462017894,
+      "hf_generation_seconds": 3.4535236000083387,
+      "nanogpt_generation_seconds": 6.7202542999293655
+    }
+  ],
+  "summary": {
+    "all_token_ids_equal": true,
+    "max_first_forward_logits_abs_error": 0.030181884765625,
+    "mean_first_forward_logits_abs_error": 0.011266091419383884
+  }
+}
