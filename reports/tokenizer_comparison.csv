@@ -1,0 +1,152 @@
+sample_idx,text,char_ids,char_count,char_decoded,tiktoken_ids,tiktoken_count,tiktoken_decoded,hf_ids,hf_count,hf_decoded,tiktoken_hf_id_equal
+0,"First Citizen:
+Before we proceed any further, hear me speak.
+
+All:
+Speak, speak.
+
+First Citizen:
+You are all resolved ra","[18, 47, 56, 57, 58, 1, 15, 47, 58, 47, 64, 43, 52, 10, 0, 14, 43, 44, 53, 56, 43, 1, 61, 43, 1, 54, 56, 53, 41, 43, 43, 42, 1, 39, 52, 63, 1, 44, 59, 56, 58, 46, 43, 56, 6, 1, 46, 43, 39, 56, 1, 51, 43, 1, 57, 54, 43, 39, 49, 8, 0, 0, 13, 50, 50, 10, 0, 31, 54, 43, 39, 49, 6, 1, 57, 54, 43, 39, 49, 8, 0, 0, 18, 47, 56, 57, 58, 1, 15, 47, 58, 47, 64, 43, 52, 10, 0, 37, 53, 59, 1, 39, 56, 43, 1, 39, 50, 50, 1, 56, 43, 57, 53, 50, 60, 43, 42, 1, 56, 39]",120,"First Citizen:
+Before we proceed any further, hear me speak.
+
+All:
+Speak, speak.
+
+First Citizen:
+You are all resolved ra","[5962, 22307, 25, 198, 8421, 356, 5120, 597, 2252, 11, 3285, 502, 2740, 13, 198, 198, 3237, 25, 198, 5248, 461, 11, 2740, 13, 198, 198, 5962, 22307, 25, 198, 1639, 389, 477, 12939, 2179]",35,"First Citizen:
+Before we proceed any further, hear me speak.
+
+All:
+Speak, speak.
+
+First Citizen:
+You are all resolved ra",[],0,,False
+1,"ther to die than to famish?
+
+All:
+Resolved. resolved.
+
+First Citizen:
+First, you know Caius Marcius is chief enemy to th","[58, 46, 43, 56, 1, 58, 53, 1, 42, 47, 43, 1, 58, 46, 39, 52, 1, 58, 53, 1, 44, 39, 51, 47, 57, 46, 12, 0, 0, 13, 50, 50, 10, 0, 30, 43, 57, 53, 50, 60, 43, 42, 8, 1, 56, 43, 57, 53, 50, 60, 43, 42, 8, 0, 0, 18, 47, 56, 57, 58, 1, 15, 47, 58, 47, 64, 43, 52, 10, 0, 18, 47, 56, 57, 58, 6, 1, 63, 53, 59, 1, 49, 52, 53, 61, 1, 15, 39, 47, 59, 57, 1, 25, 39, 56, 41, 47, 59, 57, 1, 47, 57, 1, 41, 46, 47, 43, 44, 1, 43, 52, 43, 51, 63, 1, 58, 53, 1, 58, 46]",120,"ther to die than to famish?
+
+All:
+Resolved. resolved.
+
+First Citizen:
+First, you know Caius Marcius is chief enemy to th","[490, 284, 4656, 621, 284, 1145, 680, 30, 198, 198, 3237, 25, 198, 4965, 5634, 13, 12939, 13, 198, 198, 5962, 22307, 25, 198, 5962, 11, 345, 760, 327, 1872, 385, 1526, 28599, 318, 4039, 4472, 284, 294]",38,"ther to die than to famish?
+
+All:
+Resolved. resolved.
+
+First Citizen:
+First, you know Caius Marcius is chief enemy to th",[],0,,False
+2,"e people.
+
+All:
+We know't, we know't.
+
+First Citizen:
+Let us kill him, and we'll have corn at our own price.
+Is't a verd","[43, 1, 54, 43, 53, 54, 50, 43, 8, 0, 0, 13, 50, 50, 10, 0, 35, 43, 1, 49, 52, 53, 61, 5, 58, 6, 1, 61, 43, 1, 49, 52, 53, 61, 5, 58, 8, 0, 0, 18, 47, 56, 57, 58, 1, 15, 47, 58, 47, 64, 43, 52, 10, 0, 24, 43, 58, 1, 59, 57, 1, 49, 47, 50, 50, 1, 46, 47, 51, 6, 1, 39, 52, 42, 1, 61, 43, 5, 50, 50, 1, 46, 39, 60, 43, 1, 41, 53, 56, 52, 1, 39, 58, 1, 53, 59, 56, 1, 53, 61, 52, 1, 54, 56, 47, 41, 43, 8, 0, 21, 57, 5, 58, 1, 39, 1, 60, 43, 56, 42]",120,"e people.
+
+All:
+We know't, we know't.
+
+First Citizen:
+Let us kill him, and we'll have corn at our own price.
+Is't a verd","[68, 661, 13, 198, 198, 3237, 25, 198, 1135, 760, 470, 11, 356, 760, 470, 13, 198, 198, 5962, 22307, 25, 198, 5756, 514, 1494, 683, 11, 290, 356, 1183, 423, 11676, 379, 674, 898, 2756, 13, 198, 3792, 470, 257, 3326, 67]",43,"e people.
+
+All:
+We know't, we know't.
+
+First Citizen:
+Let us kill him, and we'll have corn at our own price.
+Is't a verd",[],0,,False
+3,"ict?
+
+All:
+No more talking on't; let it be done: away, away!
+
+Second Citizen:
+One word, good citizens.
+
+First Citizen:
+W","[47, 41, 58, 12, 0, 0, 13, 50, 50, 10, 0, 26, 53, 1, 51, 53, 56, 43, 1, 58, 39, 50, 49, 47, 52, 45, 1, 53, 52, 5, 58, 11, 1, 50, 43, 58, 1, 47, 58, 1, 40, 43, 1, 42, 53, 52, 43, 10, 1, 39, 61, 39, 63, 6, 1, 39, 61, 39, 63, 2, 0, 0, 31, 43, 41, 53, 52, 42, 1, 15, 47, 58, 47, 64, 43, 52, 10, 0, 27, 52, 43, 1, 61, 53, 56, 42, 6, 1, 45, 53, 53, 42, 1, 41, 47, 58, 47, 64, 43, 52, 57, 8, 0, 0, 18, 47, 56, 57, 58, 1, 15, 47, 58, 47, 64, 43, 52, 10, 0, 35]",120,"ict?
+
+All:
+No more talking on't; let it be done: away, away!
+
+Second Citizen:
+One word, good citizens.
+
+First Citizen:
+W","[713, 30, 198, 198, 3237, 25, 198, 2949, 517, 3375, 319, 470, 26, 1309, 340, 307, 1760, 25, 1497, 11, 1497, 0, 198, 198, 12211, 22307, 25, 198, 3198, 1573, 11, 922, 4290, 13, 198, 198, 5962, 22307, 25, 198, 54]",41,"ict?
+
+All:
+No more talking on't; let it be done: away, away!
+
+Second Citizen:
+One word, good citizens.
+
+First Citizen:
+W",[],0,,False
+4,"e are accounted poor citizens, the patricians good.
+What authority surfeits on would relieve us: if they
+would yield us ","[43, 1, 39, 56, 43, 1, 39, 41, 41, 53, 59, 52, 58, 43, 42, 1, 54, 53, 53, 56, 1, 41, 47, 58, 47, 64, 43, 52, 57, 6, 1, 58, 46, 43, 1, 54, 39, 58, 56, 47, 41, 47, 39, 52, 57, 1, 45, 53, 53, 42, 8, 0, 35, 46, 39, 58, 1, 39, 59, 58, 46, 53, 56, 47, 58, 63, 1, 57, 59, 56, 44, 43, 47, 58, 57, 1, 53, 52, 1, 61, 53, 59, 50, 42, 1, 56, 43, 50, 47, 43, 60, 43, 1, 59, 57, 10, 1, 47, 44, 1, 58, 46, 43, 63, 0, 61, 53, 59, 50, 42, 1, 63, 47, 43, 50, 42, 1, 59, 57, 1]",120,"e are accounted poor citizens, the patricians good.
+What authority surfeits on would relieve us: if they
+would yield us ","[68, 389, 17830, 3595, 4290, 11, 262, 1458, 1173, 1547, 922, 13, 198, 2061, 4934, 969, 5036, 896, 319, 561, 26958, 514, 25, 611, 484, 198, 19188, 7800, 514, 220]",30,"e are accounted poor citizens, the patricians good.
+What authority surfeits on would relieve us: if they
+would yield us ",[],0,,False
+5,"but the superfluity, while it were
+wholesome, we might guess they relieved us humanely;
+but they think we are too dear: ","[40, 59, 58, 1, 58, 46, 43, 1, 57, 59, 54, 43, 56, 44, 50, 59, 47, 58, 63, 6, 1, 61, 46, 47, 50, 43, 1, 47, 58, 1, 61, 43, 56, 43, 0, 61, 46, 53, 50, 43, 57, 53, 51, 43, 6, 1, 61, 43, 1, 51, 47, 45, 46, 58, 1, 45, 59, 43, 57, 57, 1, 58, 46, 43, 63, 1, 56, 43, 50, 47, 43, 60, 43, 42, 1, 59, 57, 1, 46, 59, 51, 39, 52, 43, 50, 63, 11, 0, 40, 59, 58, 1, 58, 46, 43, 63, 1, 58, 46, 47, 52, 49, 1, 61, 43, 1, 39, 56, 43, 1, 58, 53, 53, 1, 42, 43, 39, 56, 10, 1]",120,"but the superfluity, while it were
+wholesome, we might guess they relieved us humanely;
+but they think we are too dear: ","[4360, 262, 48713, 414, 11, 981, 340, 547, 198, 1929, 4316, 462, 11, 356, 1244, 4724, 484, 22598, 514, 31533, 306, 26, 198, 4360, 484, 892, 356, 389, 1165, 13674, 25, 220]",32,"but the superfluity, while it were
+wholesome, we might guess they relieved us humanely;
+but they think we are too dear: ",[],0,,False
+6,"the leanness that
+afflicts us, the object of our misery, is as an
+inventory to particularise their abundance; our
+suffer","[58, 46, 43, 1, 50, 43, 39, 52, 52, 43, 57, 57, 1, 58, 46, 39, 58, 0, 39, 44, 44, 50, 47, 41, 58, 57, 1, 59, 57, 6, 1, 58, 46, 43, 1, 53, 40, 48, 43, 41, 58, 1, 53, 44, 1, 53, 59, 56, 1, 51, 47, 57, 43, 56, 63, 6, 1, 47, 57, 1, 39, 57, 1, 39, 52, 0, 47, 52, 60, 43, 52, 58, 53, 56, 63, 1, 58, 53, 1, 54, 39, 56, 58, 47, 41, 59, 50, 39, 56, 47, 57, 43, 1, 58, 46, 43, 47, 56, 1, 39, 40, 59, 52, 42, 39, 52, 41, 43, 11, 1, 53, 59, 56, 0, 57, 59, 44, 44, 43, 56]",120,"the leanness that
+afflicts us, the object of our misery, is as an
+inventory to particularise their abundance; our
+suffer","[1169, 10904, 1108, 326, 198, 2001, 42267, 514, 11, 262, 2134, 286, 674, 24672, 11, 318, 355, 281, 198, 24807, 284, 1948, 786, 511, 20038, 26, 674, 198, 82, 13712]",30,"the leanness that
+afflicts us, the object of our misery, is as an
+inventory to particularise their abundance; our
+suffer",[],0,,False
+7,"ance is a gain to them Let us revenge this with
+our pikes, ere we become rakes: for the gods know I
+speak this in hunger","[39, 52, 41, 43, 1, 47, 57, 1, 39, 1, 45, 39, 47, 52, 1, 58, 53, 1, 58, 46, 43, 51, 1, 24, 43, 58, 1, 59, 57, 1, 56, 43, 60, 43, 52, 45, 43, 1, 58, 46, 47, 57, 1, 61, 47, 58, 46, 0, 53, 59, 56, 1, 54, 47, 49, 43, 57, 6, 1, 43, 56, 43, 1, 61, 43, 1, 40, 43, 41, 53, 51, 43, 1, 56, 39, 49, 43, 57, 10, 1, 44, 53, 56, 1, 58, 46, 43, 1, 45, 53, 42, 57, 1, 49, 52, 53, 61, 1, 21, 0, 57, 54, 43, 39, 49, 1, 58, 46, 47, 57, 1, 47, 52, 1, 46, 59, 52, 45, 43, 56]",120,"ance is a gain to them Let us revenge this with
+our pikes, ere we become rakes: for the gods know I
+speak this in hunger","[590, 318, 257, 4461, 284, 606, 3914, 514, 15827, 428, 351, 198, 454, 279, 7938, 11, 304, 260, 356, 1716, 374, 1124, 25, 329, 262, 11858, 760, 314, 198, 47350, 428, 287, 16460]",33,"ance is a gain to them Let us revenge this with
+our pikes, ere we become rakes: for the gods know I
+speak this in hunger",[],0,,False
+8," for bread, not in thirst for revenge.
+
+Second Citizen:
+Would you proceed especially against Caius Marcius?
+
+All:
+Agains","[1, 44, 53, 56, 1, 40, 56, 43, 39, 42, 6, 1, 52, 53, 58, 1, 47, 52, 1, 58, 46, 47, 56, 57, 58, 1, 44, 53, 56, 1, 56, 43, 60, 43, 52, 45, 43, 8, 0, 0, 31, 43, 41, 53, 52, 42, 1, 15, 47, 58, 47, 64, 43, 52, 10, 0, 35, 53, 59, 50, 42, 1, 63, 53, 59, 1, 54, 56, 53, 41, 43, 43, 42, 1, 43, 57, 54, 43, 41, 47, 39, 50, 50, 63, 1, 39, 45, 39, 47, 52, 57, 58, 1, 15, 39, 47, 59, 57, 1, 25, 39, 56, 41, 47, 59, 57, 12, 0, 0, 13, 50, 50, 10, 0, 13, 45, 39, 47, 52, 57]",120," for bread, not in thirst for revenge.
+
+Second Citizen:
+Would you proceed especially against Caius Marcius?
+
+All:
+Agains","[329, 8509, 11, 407, 287, 24613, 329, 15827, 13, 198, 198, 12211, 22307, 25, 198, 17353, 345, 5120, 2592, 1028, 327, 1872, 385, 1526, 28599, 30, 198, 198, 3237, 25, 198, 10262, 1299]",33," for bread, not in thirst for revenge.
+
+Second Citizen:
+Would you proceed especially against Caius Marcius?
+
+All:
+Agains",[],0,,False
+9,"t him first: he's a very dog to the commonalty.
+
+Second Citizen:
+Consider you what services he has done for his country?","[58, 1, 46, 47, 51, 1, 44, 47, 56, 57, 58, 10, 1, 46, 43, 5, 57, 1, 39, 1, 60, 43, 56, 63, 1, 42, 53, 45, 1, 58, 53, 1, 58, 46, 43, 1, 41, 53, 51, 51, 53, 52, 39, 50, 58, 63, 8, 0, 0, 31, 43, 41, 53, 52, 42, 1, 15, 47, 58, 47, 64, 43, 52, 10, 0, 15, 53, 52, 57, 47, 42, 43, 56, 1, 63, 53, 59, 1, 61, 46, 39, 58, 1, 57, 43, 56, 60, 47, 41, 43, 57, 1, 46, 43, 1, 46, 39, 57, 1, 42, 53, 52, 43, 1, 44, 53, 56, 1, 46, 47, 57, 1, 41, 53, 59, 52, 58, 56, 63, 12]",120,"t him first: he's a very dog to the commonalty.
+
+Second Citizen:
+Consider you what services he has done for his country?","[83, 683, 717, 25, 339, 338, 257, 845, 3290, 284, 262, 2219, 6017, 13, 198, 198, 12211, 22307, 25, 198, 19626, 345, 644, 2594, 339, 468, 1760, 329, 465, 1499, 30]",31,"t him first: he's a very dog to the commonalty.
+
+Second Citizen:
+Consider you what services he has done for his country?",[],0,,False
