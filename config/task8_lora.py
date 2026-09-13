@@ -1,0 +1,8 @@
+# Task 8: GPT-2 LoRA fine-tuning configuration.
+DEVICE = 'cpu'
+MAX_ITERS = 20
+EVAL_INTERVAL = 5
+EVAL_ITERS = 20
+LEARNING_RATE = 3e-5
+LORA_RANK = 8
+LORA_ALPHA = 16.0
