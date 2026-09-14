@@ -1,3 +1,4 @@
+import ast
 import importlib.util
 import runpy
 import unittest
@@ -114,11 +115,25 @@ class ReproducibilityTests(unittest.TestCase):
                 self.assertEqual(missing, [])
 
     def test_reproducibility_tests_do_not_launch_training(self):
-        test_source = Path(__file__).read_text(encoding="utf-8")
+        tree = ast.parse(Path(__file__).read_text(encoding="utf-8"))
+        forbidden_calls = []
 
-        self.assertNotIn("subprocess", test_source)
-        self.assertNotIn("train.py", test_source)
-        self.assertNotIn("torchrun", test_source)
+        for node in ast.walk(tree):
+            if not isinstance(node, ast.Call):
+                continue
+
+            func = node.func
+            if isinstance(func, ast.Attribute) and isinstance(func.value, ast.Name):
+                if func.value.id == "subprocess":
+                    forbidden_calls.append(f"subprocess.{func.attr}")
+                if func.value.id == "os" and func.attr == "system":
+                    forbidden_calls.append("os.system")
+
+            if isinstance(func, ast.Attribute) and func.attr == "run_module":
+                if node.args and isinstance(node.args[0], ast.Constant) and node.args[0].value == "train":
+                    forbidden_calls.append("run_module(train)")
+
+        self.assertEqual(forbidden_calls, [])
 
 
 if __name__ == "__main__":
