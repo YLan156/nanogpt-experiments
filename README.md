@@ -246,3 +246,134 @@ All nanoGPT experiments are powered by GPUs on [Lambda labs](https://lambdalabs.
 - Training metrics were logged to W&B.
 - Results were recorded with W&B Tables.
 - Model checkpoints and LoRA adapters were uploaded as W&B Artifacts.
+
+## Course Experiment Workflow
+
+This fork records a compact nanoGPT experiment workflow for Shakespeare data, GPT-2 evaluation, fine-tuning, W&B experiment tracking, and reproducibility checks. Generated datasets, local checkpoints, virtual environments, Hugging Face caches, `.env` files, and local `wandb/` cache directories are intentionally excluded from Git. Reproducible source code, configuration files, small reports, plots, and external run or Artifact links are tracked instead.
+
+### Environment and Device Check
+
+The environment is recorded with `make_env_report.py` and `reports/environment.json`. The report captures the Python package context, PyTorch availability, W&B version, and runtime device information. The small CPU-compatible training configuration is stored in `config/train_shakespeare_char_small.py`, which keeps the experiment reproducible on machines without a compatible CUDA build.
+
+Run:
+
+```sh
+python make_env_report.py
+```
+
+### Shakespeare Data Preparation
+
+Character-level Shakespeare data is prepared with `data/shakespeare_char/prepare.py`, while GPT-2 BPE Shakespeare data is prepared with `data/shakespeare/prepare.py`. The preparation scripts generate local binary files such as `train.bin`, `val.bin`, and `meta.pkl`; these files are ignored because they are deterministic outputs that can be regenerated from the scripts.
+
+Run:
+
+```sh
+python data/shakespeare_char/prepare.py
+python data/shakespeare/prepare.py
+```
+
+### Small Scratch Training and Inference
+
+The small scratch experiment uses `config/task2_scratch.py` and `sample.py`. Fixed prompts are sampled before and after training to compare random-model behavior with the trained character model. The generated samples and training log are saved in `reports/samples_scratch_before.jsonl`, `reports/samples_scratch_after.jsonl`, and `reports/task2_training.log`.
+
+Run:
+
+```sh
+python train.py config/task2_scratch.py --device=cpu --compile=False
+python sample.py --out_dir=out-task2-scratch --device=cpu --compile=False
+```
+
+### Token Frequency and Embedding Norm Statistics
+
+Token statistics are produced by the data preparation scripts and `task4_compare_tokenizer.py`. The tracked reports are `reports/token_frequency_char.csv`, `reports/token_frequency_char.png`, and `reports/tokenizer_comparison.csv`. These files document the character-token distribution and compare character tokenization with GPT-2 BPE tokenization.
+
+Run:
+
+```sh
+python task4_compare_tokenizer.py
+```
+
+### Hugging Face GPT-2 Inference
+
+Hugging Face GPT-2 inference is implemented in `hf_gpt2_inference.py` and `task3_pretrained_eval.py`, with configuration in `config/task3_pretrained_eval.py`. The evaluation records validation loss, perplexity, parameter count, inference speed, memory information, and fixed-prompt generations in `reports/task3_pretrained_eval.json` and `reports/hf_gpt2_predictions.jsonl`.
+
+Model link: [openai-community/gpt2](https://huggingface.co/openai-community/gpt2)
+
+Run:
+
+```sh
+python task3_pretrained_eval.py config/task3_pretrained_eval.py
+```
+
+### Hugging Face GPT-2 and nanoGPT GPT-2 Alignment
+
+The alignment check is implemented in `hf_nanogpt_alignment.py`. It compares Hugging Face GPT-2 and nanoGPT GPT-2 token IDs, generated text, and logits differences under fixed prompts and seeds. The result is stored in `reports/hf_nanogpt_alignment.json`.
+
+Run:
+
+```sh
+python hf_nanogpt_alignment.py
+```
+
+### GPT-2 Fine-Tuning and Inference
+
+GPT-2 fine-tuning uses `config/finetune_shakespeare.py`, `config/task4_finetune.py`, `task4_finetune.py`, and `task4_finalize.py`. The experiment starts from GPT-2 weights and fine-tunes on GPT-2 BPE Shakespeare data. The before-and-after generation comparison is saved in `reports/gpt2_before_after_finetune.jsonl`, and evaluation metrics are saved in `reports/task4_finetune.json`.
+
+Run:
+
+```sh
+python task4_finetune.py config/task4_finetune.py
+python task4_finalize.py
+```
+
+### W&B Experiment Logging and Comparison
+
+The training loop in `train.py` logs train loss, validation loss, learning rate, MFU, iteration loss, iteration time, tokens per second, gradient norm, parameter count, peak memory, token-frequency plots, embedding-norm plots, generation Tables, and checkpoint Artifacts. `task5_compare.py` builds a comparable W&B group for scratch, pretrained, and fine-tuned runs. `task6_qwen_instruct.py` records GPT-2 and Qwen instruction-answer comparisons, and `task8_lora.py` records LoRA results and adapter Artifacts.
+
+W&B links:
+
+- Task 1 run: [task1-scratch](https://wandb.ai/ylan156-hong-kong-university-of-science-and-technology/shakespeare-char/runs/l2b614lk)
+- Task 1 model Artifact: [task1-scratch-best-checkpoint:v1](https://wandb.ai/ylan156-hong-kong-university-of-science-and-technology/shakespeare-char/artifacts/model/task1-scratch-best-checkpoint/v1)
+- Task 2 scratch run: [task2-scratch-character](https://wandb.ai/ylan156-hong-kong-university-of-science-and-technology/shakespeare-char-task2/runs/09b113i2)
+- Task 3 pretrained run: [task3-pretrained-gpt2-eval](https://wandb.ai/ylan156-hong-kong-university-of-science-and-technology/shakespeare-char-task3/runs/x8b56ad4)
+- Task 4 fine-tuned run: [task4-finetuned-gpt2](https://wandb.ai/ylan156-hong-kong-university-of-science-and-technology/shakespeare-char-task4/runs/1s5n392c)
+- Task 5 group: [task5-comparison](https://wandb.ai/ylan156-hong-kong-university-of-science-and-technology/shakespeare-char-task5/runs?group=task5-comparison)
+- Task 6 Qwen Table run: [qwen-vs-gpt2](https://wandb.ai/ylan156-hong-kong-university-of-science-and-technology/shakespeare-char-task6/runs/3vog9xvk)
+- Task 8 LoRA run: [task8-gpt2-lora](https://wandb.ai/ylan156-hong-kong-university-of-science-and-technology/shakespeare-char-task8/runs/fvlzh276)
+- Task 8 comparison run: [task8-lora-comparison](https://wandb.ai/ylan156-hong-kong-university-of-science-and-technology/shakespeare-char-task8/runs/x125ry0n)
+- Task 8 LoRA Artifact: [task8-gpt2-lora-adapter:v0](https://wandb.ai/ylan156-hong-kong-university-of-science-and-technology/shakespeare-char-task8/artifacts/model/task8-gpt2-lora-adapter/v0)
+
+### Qwen Instruct Comparison
+
+The instruction-following comparison uses `task6_qwen_instruct.py` and compares GPT-2 output with Qwen output on fixed prompts. The result table includes the prompt, GPT-2 output, Qwen output, instruction-following score, Chinese expression score, and answer-completeness score. The local summary is stored in `reports/task6_qwen_instruct_wandb.json`.
+
+Model link: [Qwen/Qwen2.5-0.5B-Instruct](https://huggingface.co/Qwen/Qwen2.5-0.5B-Instruct)
+
+Run:
+
+```sh
+python task6_qwen_instruct.py
+```
+
+### Tests and Reproducibility Commands
+
+Lightweight reproducibility tests are stored in `tests/test_reproducibility.py`. They check character encode/decode round trip, GPT-2 tokenizer ID consistency when local dependencies are available, small GPT forward output shape, required experiment configuration fields, and that tests do not launch formal training.
+
+The Git/W&B reproducibility linkage is recorded in `reports/reproducibility_run.json`. It stores the GitHub repository URL, current branch, commit SHA, README path, submission manifest path, experiment-summary path, intended W&B project/group/run name, and the exact test command. In this checkout the live W&B reproducibility run is pending because the local Python virtual-environment launchers point to a missing Python executable and `wandb` is not available on `PATH`.
+
+Run:
+
+```sh
+python -m unittest discover -s tests -v
+git status --short --branch
+git log --oneline --graph --decorate --all -40
+git ls-files | Select-String -Pattern '(^|/)(\.env|wandb|out[^/]*)/|\.pt$|\.bin$|\.pkl$|\.safetensors$'
+```
+
+After restoring Python or recreating the virtual environment, create the W&B reproducibility run with the same Git metadata:
+
+```sh
+python log_reproducibility_run.py
+```
+
+The final command should produce no output. This confirms that local secrets, caches, checkpoints, and generated binary datasets are not tracked by Git.

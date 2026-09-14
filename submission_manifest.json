@@ -1,0 +1,157 @@
+{
+  "repository": {
+    "url": "https://github.com/YLan156/nanogpt-experiments.git",
+    "web_url": "https://github.com/YLan156/nanogpt-experiments",
+    "branch": "master",
+    "current_commit_sha": "2771e43be86f41a2fda806417bfbd8a157a52dcd",
+    "upstream_url": "https://github.com/karpathy/nanoGPT.git"
+  },
+  "environment": {
+    "source": ".venv/pyvenv.cfg and installed package metadata",
+    "python": "3.11.9",
+    "pytorch": "2.14.0",
+    "transformers": "5.17.0",
+    "wandb": "0.30.0",
+    "tiktoken": null,
+    "tiktoken_note": "No tiktoken dist-info directory was present in the checked .venv site-packages directory.",
+    "device": "cpu",
+    "device_note": "W&B summary records Windows 10 CPU execution. An NVIDIA GeForce RTX 5060 Laptop GPU was detected, but the installed PyTorch wheel did not support sm_120, so experiments used CPU."
+  },
+  "config_paths": {
+    "scratch_character_training": "config/train_shakespeare_char.py",
+    "gpt2_pretrained_eval": "config/task3_pretrained_eval.py",
+    "gpt2_finetune": "config/task4_finetune.py",
+    "gpt2_lora": "config/task8_lora.py"
+  },
+  "huggingface_models": [
+    {
+      "model_id": "openai-community/gpt2",
+      "url": "https://huggingface.co/openai-community/gpt2",
+      "usage": "GPT-2 pretrained inference, nanoGPT GPT-2 alignment, and fine-tuning baseline"
+    },
+    {
+      "model_id": "Qwen/Qwen2.5-0.5B-Instruct",
+      "url": "https://huggingface.co/Qwen/Qwen2.5-0.5B-Instruct",
+      "usage": "Chinese instruction-answer comparison against GPT-2"
+    }
+  ],
+  "wandb": {
+    "entity": "ylan156-hong-kong-university-of-science-and-technology",
+    "group_url": "https://wandb.ai/ylan156-hong-kong-university-of-science-and-technology/shakespeare-char-task5/runs?group=task5-comparison",
+    "core_run_ids": {
+      "task1_scratch": "l2b614lk",
+      "task2_scratch_character": "09b113i2",
+      "task3_gpt2_pretrained_eval": "x8b56ad4",
+      "task4_gpt2_finetuned": "1s5n392c",
+      "task5_scratch_character": "nu14xe7a",
+      "task5_gpt2_pretrained": "a5umfxq4",
+      "task5_gpt2_finetuned": "vw614wav",
+      "task5_comparison_summary": "uov5so7d",
+      "task6_gpt2_vs_qwen": "3vog9xvk",
+      "task8_gpt2_lora": "fvlzh276",
+      "task8_lora_comparison": "x125ry0n"
+    },
+    "runs": {
+      "task1_scratch": "https://wandb.ai/ylan156-hong-kong-university-of-science-and-technology/shakespeare-char/runs/l2b614lk",
+      "task2_scratch_character": "https://wandb.ai/ylan156-hong-kong-university-of-science-and-technology/shakespeare-char-task2/runs/09b113i2",
+      "task3_gpt2_pretrained_eval": "https://wandb.ai/ylan156-hong-kong-university-of-science-and-technology/shakespeare-char-task3/runs/x8b56ad4",
+      "task4_gpt2_finetuned": "https://wandb.ai/ylan156-hong-kong-university-of-science-and-technology/shakespeare-char-task4/runs/1s5n392c",
+      "task5_comparison_summary": "https://wandb.ai/ylan156-hong-kong-university-of-science-and-technology/shakespeare-char-task5/runs/uov5so7d",
+      "task6_gpt2_vs_qwen": "https://wandb.ai/ylan156-hong-kong-university-of-science-and-technology/shakespeare-char-task6/runs/3vog9xvk",
+      "task8_gpt2_lora": "https://wandb.ai/ylan156-hong-kong-university-of-science-and-technology/shakespeare-char-task8/runs/fvlzh276",
+      "task8_lora_comparison": "https://wandb.ai/ylan156-hong-kong-university-of-science-and-technology/shakespeare-char-task8/runs/x125ry0n"
+    },
+    "tables": {
+      "task1_token_frequency": "charts/token_frequency_table",
+      "task1_embedding_norm": "charts/embedding_norm_table",
+      "task5_fixed_prompt_outputs": "tables/fixed_prompt_outputs",
+      "task6_qwen_vs_gpt2_answers": "table/qwen_vs_gpt2_answers"
+    },
+    "artifacts": {
+      "task1_scratch_best_checkpoint": "https://wandb.ai/ylan156-hong-kong-university-of-science-and-technology/shakespeare-char/artifacts/model/task1-scratch-best-checkpoint/v1",
+      "task2_scratch_best_checkpoint": "https://wandb.ai/ylan156-hong-kong-university-of-science-and-technology/shakespeare-char-task2/artifacts/model/task2-scratch-character-best-checkpoint/v5",
+      "task4_finetuned_best_checkpoint": "https://wandb.ai/ylan156-hong-kong-university-of-science-and-technology/shakespeare-char-task4/artifacts/model/task4-finetuned-gpt2-best-checkpoint/v3",
+      "task5_finetuned_best_checkpoint": "https://wandb.ai/ylan156-hong-kong-university-of-science-and-technology/shakespeare-char-task5/artifacts/model/task5-finetuned-best-checkpoint",
+      "task8_lora_adapter": "https://wandb.ai/ylan156-hong-kong-university-of-science-and-technology/shakespeare-char-task8/artifacts/model/task8-gpt2-lora-adapter/v0"
+    }
+  },
+  "reproducibility_run": {
+    "local_report": "reports/reproducibility_run.json",
+    "repository_url": "https://github.com/YLan156/nanogpt-experiments.git",
+    "github_url": "https://github.com/YLan156/nanogpt-experiments",
+    "branch": "master",
+    "commit_sha": "2771e43be86f41a2fda806417bfbd8a157a52dcd",
+    "intended_wandb_project": "shakespeare-char-reproducibility",
+    "intended_wandb_group": "submission-reproducibility",
+    "intended_wandb_run_name": "task-reproducibility-link-git-wandb",
+    "wandb_run_url": null,
+    "status": "blocked_by_local_python_environment",
+    "test_command": "python -m unittest discover -s tests -v",
+    "summary_paths": [
+      "README.md",
+      "log_reproducibility_run.py",
+      "submission_manifest.json",
+      "reports/wandb/experiment_summary.md",
+      "reports/reproducibility_run.json"
+    ]
+  },
+  "metrics": {
+    "scratch_character": {
+      "validation_loss": 2.4206,
+      "perplexity": 11.2527,
+      "training_seconds": 132.04,
+      "tokens_per_second": 404.23,
+      "parameter_count": 812288,
+      "source": "reports/wandb/experiment_summary.md"
+    },
+    "gpt2_pretrained_eval": {
+      "validation_loss": 4.026545310020447,
+      "perplexity": 56.06688258820947,
+      "tokens_per_second": 1984.326163226356,
+      "peak_memory_mb": 0.0,
+      "parameter_count": 124439808,
+      "source": "reports/task3_pretrained_eval.json"
+    },
+    "gpt2_finetuned": {
+      "validation_loss": 3.3446741461753846,
+      "perplexity": 28.351335770113852,
+      "tokens_per_second": 1823.5658705125013,
+      "peak_memory_mb": 0.0,
+      "parameter_count": 124439808,
+      "best_checkpoint_iter": 20,
+      "source": "reports/task4_finetune.json"
+    },
+    "qwen_instruct": {
+      "model_id": "Qwen/Qwen2.5-0.5B-Instruct",
+      "average_instruction_following": 1.0,
+      "average_chinese_expression": 0.774,
+      "average_answer_completeness": 1.0,
+      "source": "reports/task6_qwen_instruct_wandb.json"
+    },
+    "gpt2_lora": {
+      "validation_loss": 3.816529726982117,
+      "perplexity": 45.446223550901315,
+      "training_seconds": 302.50014920000103,
+      "tokens_per_second": 1863.9311680775,
+      "total_parameter_count": 124882176,
+      "trainable_parameter_count": 442368,
+      "trainable_parameter_ratio": 0.0035422829275492443,
+      "source": "reports/task8_lora.json"
+    }
+  },
+  "report_files": [
+    "README.md",
+    "log_reproducibility_run.py",
+    "reports/wandb/experiment_summary.md",
+    "reports/task3_pretrained_eval.json",
+    "reports/task4_finetune.json",
+    "reports/task6_qwen_instruct_wandb.json",
+    "reports/task8_lora.json",
+    "reports/task8_comparison.json",
+    "reports/hf_nanogpt_alignment.json",
+    "reports/reproducibility_run.json",
+    "reports/token_frequency_char.csv",
+    "reports/token_frequency_char.png",
+    "reports/tokenizer_comparison.csv"
+  ]
+}
