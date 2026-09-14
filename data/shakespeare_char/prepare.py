@@ -1,68 +1,111 @@
-"""
-Prepare the Shakespeare dataset for character-level language modeling.
-So instead of encoding with GPT-2 BPE tokens, we just map characters to ints.
-Will save train.bin, val.bin containing the ids, and meta.pkl containing the
-encoder and decoder and some other related info.
-"""
 import os
 import pickle
-import requests
-import numpy as np
+import csv
+from collections import Counter
+import matplotlib.pyplot as plt
 
-# download the tiny shakespeare dataset
-input_file_path = os.path.join(os.path.dirname(__file__), 'input.txt')
-if not os.path.exists(input_file_path):
-    data_url = 'https://raw.githubusercontent.com/karpathy/char-rnn/master/data/tinyshakespeare/input.txt'
-    with open(input_file_path, 'w') as f:
-        f.write(requests.get(data_url).text)
-
-with open(input_file_path, 'r') as f:
+# read the input text
+with open('input.txt', 'r', encoding='utf-8') as f:
     data = f.read()
-print(f"length of dataset in characters: {len(data):,}")
 
-# get all the unique characters that occur in this text
+print(f"总原始字符数：{len(data)}")
+
+# get all unique characters
 chars = sorted(list(set(data)))
 vocab_size = len(chars)
-print("all the unique characters:", ''.join(chars))
-print(f"vocab size: {vocab_size:,}")
+print(f"vocabulary size: {vocab_size}")
 
-# create a mapping from characters to integers
-stoi = { ch:i for i,ch in enumerate(chars) }
-itos = { i:ch for i,ch in enumerate(chars) }
-def encode(s):
-    return [stoi[c] for c in s] # encoder: take a string, output a list of integers
-def decode(l):
-    return ''.join([itos[i] for i in l]) # decoder: take a list of integers, output a string
+# create mapping
+stoi = {ch:i for i,ch in enumerate(chars)}
+itos = {i:ch for i,ch in enumerate(chars)}
 
-# create the train and test splits
-n = len(data)
-train_data = data[:int(n*0.9)]
-val_data = data[int(n*0.9):]
+# ========= encode / decode 函数 =========
+def encode(text):
+    """text -> token id list"""
+    return [stoi[c] for c in text]
 
-# encode both to integers
-train_ids = encode(train_data)
-val_ids = encode(val_data)
-print(f"train has {len(train_ids):,} tokens")
-print(f"val has {len(val_ids):,} tokens")
+def decode(ids):
+    """token id list -> text"""
+    return ''.join([itos[i] for i in ids])
 
-# export to bin files
-train_ids = np.array(train_ids, dtype=np.uint16)
-val_ids = np.array(val_ids, dtype=np.uint16)
-train_ids.tofile(os.path.join(os.path.dirname(__file__), 'train.bin'))
-val_ids.tofile(os.path.join(os.path.dirname(__file__), 'val.bin'))
+# -------- 测试encode decode --------
+test_text = "Hello World!"
+test_ids = encode(test_text)
+decoded_text = decode(test_ids)
+print("\n==== encode/decode 双向测试 ====")
+print(f"原始文本: {test_text}")
+print(f"encode结果: {test_ids}")
+print(f"decode还原: {decoded_text}")
+assert decoded_text == test_text, "encode decode 双向转换失败！"
 
-# save the meta information as well, to help us encode/decode later
+# full token ids
+full_ids = encode(data)
+
+# split train / val
+n = int(0.9 * len(full_ids))
+train_ids = full_ids[:n]
+val_ids = full_ids[n:]
+
+print(f"\ntrain token数量: {len(train_ids)}")
+print(f"val token数量: {len(val_ids)}")
+print(f"train占比: {len(train_ids)/len(full_ids):.4f}，val占比: {len(val_ids)/len(full_ids):.4f}")
+
+# =========统计每个token id频次========
+counter = Counter(full_ids)
+total_tokens = len(full_ids)
+token_stats = []
+for token_id in range(vocab_size):
+    cnt = counter.get(token_id, 0)
+    freq = cnt / total_tokens
+    char = itos[token_id]
+    token_stats.append({"token_id":token_id, "char":char, "count":cnt, "frequency":freq})
+
+# 按count降序排序
+token_stats_sorted = sorted(token_stats, key=lambda x:x["count"], reverse=True)
+
+# 打印Top30
+print("\n==== Top30 token ====")
+print(f"{'token_id':<10}{'char':<10}{'count':<12}{'frequency'}")
+for item in token_stats_sorted[:30]:
+    print(f"{item['token_id']:<10}{repr(item['char']):<10}{item['count']:<12}{item['frequency']:.6f}")
+
+# =========保存csv reports/token_frequency_char.csv =========
+csv_path = "../../reports/token_frequency_char.csv"
+with open(csv_path, "w", encoding="utf-8", newline="") as f:
+    writer = csv.DictWriter(f, fieldnames=["token_id","char","count","frequency"])
+    writer.writeheader()
+    writer.writerows(token_stats_sorted)
+print(f"\n完整统计已保存到 {csv_path}")
+
+# =========绘制Top30柱状图 reports/token_frequency_char.png =========
+top30 = token_stats_sorted[:30]
+ids_top30 = [x["token_id"] for x in top30]
+counts_top30 = [x["count"] for x in top30]
+chars_top30 = [repr(x["char"]) for x in top30]
+
+plt.figure(figsize=(14,6))
+plt.bar(range(len(top30)), counts_top30)
+plt.xticks(range(len(top30)), chars_top30, rotation=60)
+plt.xlabel("token char")
+plt.ylabel("count")
+plt.title("Top30 token frequency (char‑level)")
+plt.tight_layout()
+plt.savefig("../../reports/token_frequency_char.png", dpi=150)
+plt.close()
+print("Top30柱状图已保存 reports/token_frequency_char.png")
+
+# =========保存原始meta.pkl（原有逻辑不动）========
 meta = {
     'vocab_size': vocab_size,
     'itos': itos,
     'stoi': stoi,
 }
-with open(os.path.join(os.path.dirname(__file__), 'meta.pkl'), 'wb') as f:
+with open('meta.pkl', 'wb') as f:
     pickle.dump(meta, f)
 
-# length of dataset in characters:  1115394
-# all the unique characters:
-#  !$&',-.3:;?ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz
-# vocab size: 65
-# train has 1003854 tokens
-# val has 111540 tokens
+import numpy as np
+train_ids_np = np.array(train_ids, dtype=np.uint16)
+val_ids_np = np.array(val_ids, dtype=np.uint16)
+train_ids_np.tofile('train.bin')
+val_ids_np.tofile('val.bin')
+print("\n prepare.py执行完毕，train.bin val.bin meta.pkl生成完成")
