@@ -231,3 +231,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+# Review note: keep W&B comparison metadata explicit for PR validation.
