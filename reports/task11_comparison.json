@@ -1,0 +1,14 @@
+{
+  "qwen_average_scores": {
+    "instruction_following": 1.0,
+    "chinese_expression": 0.774,
+    "answer_completeness": 1.0
+  },
+  "gpt2_average_scores": {
+    "instruction_following": 0.2,
+    "chinese_expression": 0.4293,
+    "answer_completeness": 0.0
+  },
+  "conclusion": "Qwen is expected to outperform GPT-2 on Chinese instruction following because Qwen is instruction-tuned and uses apply_chat_template, while GPT-2 is a base causal language model.",
+  "scoring_note": "Scores are transparent heuristic behavior checks, not validation loss or human evaluation."
+}
