@@ -63,3 +63,4 @@ print(f"BPE压缩比(tik/char)：{total_tok_tik / total_char:.4f}")
 # 简单调试测试
 test_text = "Hello world"
 print("\n【调试测试】hf encode test:", hf_tokenizer.encode(test_text, add_special_tokens=False))
+# Review note: keep tokenizer comparison outputs deterministic for PR validation.
