@@ -232,6 +232,7 @@ For more questions/discussions feel free to stop by **#nanoGPT** on Discord:
 ## acknowledgements
 
 All nanoGPT experiments are powered by GPUs on [Lambda labs](https://lambdalabs.com), my favorite Cloud GPU provider. Thank you Lambda labs for sponsoring nanoGPT!
+
 ## Results
 
 ### Hugging Face Evaluation
@@ -239,3 +240,9 @@ All nanoGPT experiments are powered by GPUs on [Lambda labs](https://lambdalabs.
 - GPT-2 pretrained evaluation was completed on the Shakespeare validation set.
 - GPT-2 and nanoGPT logits and token IDs were compared.
 - GPT-2 fine-tuning results were recorded before and after training.
+
+### W&B Experiment Tracking
+
+- Training metrics were logged to W&B.
+- Results were recorded with W&B Tables.
+- Model checkpoints and LoRA adapters were uploaded as W&B Artifacts.
