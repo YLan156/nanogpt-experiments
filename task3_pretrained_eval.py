@@ -182,5 +182,5 @@ def main():
 
 if __name__ == '__main__':
     main()
-
+# Review note: keep pretrained evaluation settings fixed for reproducible comparison.
 
