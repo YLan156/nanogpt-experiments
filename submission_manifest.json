@@ -95,6 +95,22 @@
       "reports/reproducibility_run.json"
     ]
   },
+  "clean_environment_reproduction": {
+    "local_report": "reports/clean_environment_reproduction.json",
+    "clean_clone_path": "C:/Users/lenovo/Documents/Codex/2026-09-10/wa/nanogpt-clean-repro-task4-local2",
+    "commit_sha": "bd1660e8c80d49407200c1af7392205f61890899",
+    "syntax_check": "passed",
+    "lightweight_tests": "passed",
+    "character_data_prepare": "passed",
+    "smoke_training": "passed",
+    "scratch_sample": "passed",
+    "huggingface_gpt2_inference": "passed",
+    "wandb_reproducibility_run": "passed_offline",
+    "wandb_offline_run_id": "822ms38o",
+    "wandb_sync_command": "wandb sync C:/Users/lenovo/Documents/Codex/2026-09-10/wa/nanogpt-clean-repro-task4-local2/wandb/offline-run-20260914_201542-822ms38o",
+    "colab_notebook": null,
+    "colab_note": "Local clean-clone reproduction was used; attach a Colab notebook only if repeating this workflow on Colab."
+  },
   "metrics": {
     "scratch_character": {
       "validation_loss": 2.4206,
@@ -150,6 +166,7 @@
     "reports/task8_comparison.json",
     "reports/hf_nanogpt_alignment.json",
     "reports/reproducibility_run.json",
+    "reports/clean_environment_reproduction.json",
     "reports/token_frequency_char.csv",
     "reports/token_frequency_char.png",
     "reports/tokenizer_comparison.csv"

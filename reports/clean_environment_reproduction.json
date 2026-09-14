@@ -1,0 +1,101 @@
+{
+  "task": "task4_clean_environment_reproduction",
+  "created_at": "2026-09-14T20:15:45+08:00",
+  "repository": {
+    "github_url": "https://github.com/YLan156/nanogpt-experiments",
+    "clone_source_used": "D:/git-demo/git-practice/nanoGPT",
+    "clone_source_note": "Direct GitHub clone failed in this shell with schannel SEC_E_NO_CREDENTIALS, so the clean directory was cloned from the local repository after its committed state had been updated.",
+    "clean_clone_path": "C:/Users/lenovo/Documents/Codex/2026-09-10/wa/nanogpt-clean-repro-task4-local2",
+    "branch": "master",
+    "commit_sha": "bd1660e8c80d49407200c1af7392205f61890899"
+  },
+  "environment": {
+    "python": "3.12.14",
+    "torch": "2.14.0+cpu",
+    "transformers": "5.17.0",
+    "wandb": "0.30.0",
+    "tiktoken": "0.14.0",
+    "matplotlib": "3.11.2",
+    "device": "cpu"
+  },
+  "commands": [
+    {
+      "step": "clone_github_repository",
+      "command": "git clone https://github.com/YLan156/nanogpt-experiments.git C:/Users/lenovo/Documents/Codex/2026-09-10/wa/nanogpt-clean-repro-task4",
+      "status": "failed",
+      "result": "GitHub clone failed with schannel SEC_E_NO_CREDENTIALS in this shell."
+    },
+    {
+      "step": "clone_local_committed_repository",
+      "command": "git -c safe.directory=D:/git-demo/git-practice/nanoGPT/.git clone D:/git-demo/git-practice/nanoGPT C:/Users/lenovo/Documents/Codex/2026-09-10/wa/nanogpt-clean-repro-task4-local2",
+      "status": "passed",
+      "result": "Created a clean clone at the recorded path."
+    },
+    {
+      "step": "install_readme_dependencies",
+      "command": "python -m venv .venv-repro; ./.venv-repro/Scripts/python.exe -m pip install torch numpy transformers datasets tiktoken wandb tqdm",
+      "status": "passed",
+      "result": "Installed README dependencies in a new virtual environment."
+    },
+    {
+      "step": "install_missing_prepare_dependency",
+      "command": "./.venv-repro/Scripts/python.exe -m pip install matplotlib",
+      "status": "passed",
+      "result": "The character prepare script imports matplotlib, which is not listed in the README dependency command."
+    },
+    {
+      "step": "syntax_check",
+      "command": "./.venv-repro/Scripts/python.exe -m compileall -q .",
+      "status": "passed",
+      "duration_seconds": 6.04
+    },
+    {
+      "step": "lightweight_tests",
+      "command": "./.venv-repro/Scripts/python.exe -m unittest discover -s tests -v",
+      "status": "passed",
+      "duration_seconds": 5.82,
+      "result": "Ran 5 tests: tokenizer round trip, config fields, GPT-2 tokenizer ID consistency, no-training guard, and small GPT forward shape."
+    },
+    {
+      "step": "character_data_prepare",
+      "command": "MPLBACKEND=Agg ../../.venv-repro/Scripts/python.exe prepare.py",
+      "working_directory": "data/shakespeare_char",
+      "status": "passed",
+      "duration_seconds": 1.17,
+      "result": "Generated train.bin, val.bin, meta.pkl, token_frequency_char.csv, and token_frequency_char.png."
+    },
+    {
+      "step": "smoke_training",
+      "command": "./.venv-repro/Scripts/python.exe train.py config/train_shakespeare_char.py --out_dir=out-repro-smoke --max_iters=2 --eval_interval=1 --eval_iters=1 --batch_size=2 --block_size=16 --n_layer=1 --n_head=1 --n_embd=16 --device=cpu --compile=False --wandb_log=False --always_save_checkpoint=True",
+      "status": "passed",
+      "duration_seconds": 3.34,
+      "result": "Completed iterations 0, 1, and final evaluation at step 2; saved out-repro-smoke/ckpt.pt."
+    },
+    {
+      "step": "scratch_sample",
+      "command": "./.venv-repro/Scripts/python.exe sample.py --out_dir=out-repro-smoke --start=ROMEO: --num_samples=1 --max_new_tokens=80 --device=cpu --compile=False",
+      "status": "passed",
+      "duration_seconds": 2.20,
+      "result": "Generated one character-level sample from the smoke checkpoint."
+    },
+    {
+      "step": "huggingface_gpt2_inference",
+      "command": "./.venv-repro/Scripts/python.exe hf_gpt2_inference.py",
+      "status": "passed",
+      "duration_seconds": 22.13,
+      "result": "Generated 5 GPT-2 prompt completions and saved reports/hf_gpt2_predictions.jsonl. First prompt speed was 39.15 tokens/s."
+    },
+    {
+      "step": "wandb_reproducibility_run",
+      "command": "WANDB_MODE=offline ./.venv-repro/Scripts/python.exe log_reproducibility_run.py",
+      "status": "passed_offline",
+      "result": "Created local W&B offline run offline-run-20260914_201542-822ms38o with test_status=passed and commit_sha=bd1660e8c80d49407200c1af7392205f61890899. Sync after login with: wandb sync C:/Users/lenovo/Documents/Codex/2026-09-10/wa/nanogpt-clean-repro-task4-local2/wandb/offline-run-20260914_201542-822ms38o"
+    }
+  ],
+  "notebook": {
+    "used_colab": false,
+    "colab_notebook": null,
+    "note": "The reproduction was run locally in a clean clone. A Colab notebook is only required if the workflow is repeated on Colab."
+  },
+  "final_result": "Clean clone reproduction passed syntax checks, all lightweight tests, character data preparation, 2-iteration smoke training, scratch sampling, Hugging Face GPT-2 inference, and an offline W&B reproducibility run."
+}

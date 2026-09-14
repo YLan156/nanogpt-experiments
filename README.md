@@ -361,6 +361,8 @@ Lightweight reproducibility tests are stored in `tests/test_reproducibility.py`.
 
 The Git/W&B reproducibility linkage is recorded in `reports/reproducibility_run.json`. It stores the GitHub repository URL, current branch, commit SHA, README path, submission manifest path, experiment-summary path, intended W&B project/group/run name, and the exact test command. In this checkout the live W&B reproducibility run is pending because the local Python virtual-environment launchers point to a missing Python executable and `wandb` is not available on `PATH`.
 
+Clean-environment reproduction is recorded in `reports/clean_environment_reproduction.json`. The run used a fresh clone in `C:/Users/lenovo/Documents/Codex/2026-09-10/wa/nanogpt-clean-repro-task4-local2` at commit `bd1660e8c80d49407200c1af7392205f61890899`, installed dependencies into `.venv-repro`, ran syntax checks and all lightweight tests, prepared the character dataset, completed a 2-iteration CPU smoke training run, generated one scratch sample, ran Hugging Face GPT-2 inference, and created a local W&B offline reproducibility run.
+
 Run:
 
 ```sh
@@ -374,6 +376,12 @@ After restoring Python or recreating the virtual environment, create the W&B rep
 
 ```sh
 python log_reproducibility_run.py
+```
+
+The offline W&B run from the clean reproduction can be synced after login:
+
+```sh
+wandb sync C:/Users/lenovo/Documents/Codex/2026-09-10/wa/nanogpt-clean-repro-task4-local2/wandb/offline-run-20260914_201542-822ms38o
 ```
 
 The final command should produce no output. This confirms that local secrets, caches, checkpoints, and generated binary datasets are not tracked by Git.
